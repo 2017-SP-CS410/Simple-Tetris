@@ -11,10 +11,11 @@ import tetris.Block;
  *
  * @author Brendan
  */
-public class RotateS extends Rotate{
+public class RotateT extends Rotate{
 
     @Override
-    public void rotate(boolean d, Block[] bs) {
+    public void rotate(boolean d, Block[] stack) {
+        // Rotation for T Terominos
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

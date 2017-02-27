@@ -11,11 +11,12 @@ import tetris.Block;
  *
  * @author Brendan
  */
-public class RotateL extends Rotate{
+public class RotateO extends Rotate{
 
     @Override
     public void rotate(boolean d, Block[] bs) {
+        // Rotation for O Tetrominos
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

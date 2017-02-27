@@ -14,7 +14,8 @@ import tetris.Block;
 public class RotateJ extends Rotate{
 
     @Override
-    public void rotate(boolean d, Block[] bs) {
+    public void rotate(boolean d, Block[] Stack) {
+        // Rotation for J Tetrominos
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
