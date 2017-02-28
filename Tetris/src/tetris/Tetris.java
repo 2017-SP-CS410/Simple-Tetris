@@ -5,6 +5,7 @@
  */
 package tetris;
 
+import tetronimo.Tetromino;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,11 +19,10 @@ public class Tetris {
      * @param args the command line arguments
      */
     
-    private static Map<Integer[], Block> stack = new HashMap<>();
+    
     private static int score = 0;
     private static Tetromino current_Tet;
-    private static int level = 0;
-    private static double gravity = 0;
+    
     
     public static void deleteLines(Block[] bs) {
         // This gets called whenever a Tetromino gets locked it
@@ -33,13 +33,11 @@ public class Tetris {
         // a full line in the stack.
         // If there are delete them and call updateScore with the number of lines
         
-        // Call nextTetromino with a boolean of weather lines where cleared or not
+        // Call nextShape
     }
     
-    public static void nextTetromino(boolean cleared) {
+    public static void nextShape() {
         // replace current_Tet with a new Tetromino
-        // Increase Level
-        // Incrase Gravity
     }
     
     public static void updateScore(int lines) {

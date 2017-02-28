@@ -38,7 +38,6 @@ public class Block {
     
     public boolean move(boolean d) {
         // d is direction True: right, False: left
-        // Don't move the block into the negatives or past 9
         // Returns if the move was sucsessful
         return false;
     }

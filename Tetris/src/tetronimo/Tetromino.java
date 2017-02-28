@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris;
+package tetronimo;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Map;
-import tetris.rotations.*;
+import tetris.Block;
+
 
 /**
  *
  * @author Brendan
  */
 public class Tetromino {
-    private static final Map<Character, Integer[][]> TETROMINO_COORDINATES = init_cor();
-    private static final Map<Character, Color> TETROMINO_COLORS = init_col();
-    private static final Map<Character, Rotate> TETROMINO_ROTATIONS = init_rot();
     private static final int LOCK_TIME = 20;
     
     private int untilLock = 0;
     private boolean locked = false;
     
+    public int[][] blockGrid;
+    public boolean state;
     public Block[] blocks = new Block[4];
     public Rotate r;
     public Tetromino(char c) {

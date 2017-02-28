@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.rotations;
+package tetronimo;
 
 import tetris.Block;
+import tetris.rotations.Rotate;
 
 /**
  *
  * @author Brendan
  */
-public class RotateO extends Rotate{
+public class RotateS extends Rotate{
 
     @Override
-    public void rotate(boolean d, Block[] bs) {
-        // Rotation for O Tetrominos
+    public void rotate(boolean d, Block[] stack) {
+        // Rotation for S Tetrominos
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
