@@ -22,7 +22,10 @@ public class Tetris {
     
     private static int score = 0;
     private static Tetromino current_Tet;
+<<<<<<< HEAD
     
+=======
+>>>>>>> parent of 82e6393... Move Commnets
     
     public static void deleteLines(Block[] bs) {
         // This gets called whenever a Tetromino gets locked it
