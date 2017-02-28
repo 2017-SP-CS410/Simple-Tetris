@@ -23,7 +23,6 @@ public class Tetris {
     private static int score = 0;
     private static Tetromino current_Tet;
     
-    
     public static void deleteLines(Block[] bs) {
         // This gets called whenever a Tetromino gets locked it
         
