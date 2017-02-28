@@ -18,11 +18,12 @@ public class Tetris {
      * @param args the command line arguments
      */
     
-    private static Map<Integer[], Block> stack = new HashMap<>();
+    private static Block[][] stack = new Block[10][20];
     private static int score = 0;
     private static Tetromino current_Tet;
     private static int level = 0;
     private static double gravity = 0;
+    private static boolean animation = false;
     
     public static void deleteLines(Block[] bs) {
         // This gets called whenever a Tetromino gets locked it

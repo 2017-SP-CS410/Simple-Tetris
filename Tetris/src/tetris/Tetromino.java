@@ -8,7 +8,6 @@ package tetris;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Map;
-import tetris.rotations.*;
 
 /**
  *
@@ -17,21 +16,27 @@ import tetris.rotations.*;
 public class Tetromino {
     private static final Map<Character, Integer[][]> TETROMINO_COORDINATES = init_cor();
     private static final Map<Character, Color> TETROMINO_COLORS = init_col();
-    private static final Map<Character, Rotate> TETROMINO_ROTATIONS = init_rot();
-    private static final int LOCK_TIME = 20;
+    
+    private static int lockTime = 20;
     
     private int untilLock = 0;
     private boolean locked = false;
     
-    public Block[] blocks = new Block[4];
-    public Rotate r;
+    private Block[][] rotations = new Block[4][4];
+    
+    private int rotationState = 0;
+    
+    private double x, y;
+    
     public Tetromino(char c) {
         // c is the string for Tetromino
     }
     
-    public void drop(double v, Map<Integer[], Block> bs) {
+    public void drop(double v, Block[][] stack) {
         // v is the downward velocity
-        // bs is the stack
+        // stack is the stack
+        
+        // Use the rotationState with rotations to check stuff
         
         // Check if Tetromino can be locked before moving
         // If it Tetromino does lock call delete lines in main
@@ -42,7 +47,7 @@ public class Tetromino {
         // Drop blocks in Tetromino by v
     }
     
-    public void dropHard(Map<Integer[], Block> bs) {
+    public void dropHard(Block[][] stack) {
         // Drops all the blocks to as far as they can go on the stack
     }
     
@@ -53,14 +58,14 @@ public class Tetromino {
     
     public void rotate(boolean d) {
         // False: counterclockwise, True: clockwise
-        // Delegates to the Rotation instance variable
+        // change rotation state by 1 based off of d
     }
     
     public void paint(Graphics g) {
-        
+        // Uses state and rotations to get the current rotation
     }
     
-    private boolean lock(Map<Integer[], Block> bs) {
+    private boolean lock(Block[][] stack) {
         // Checks to see is the Tetromino can be locked
         // If it can check if untilLock == LOCK_TIME
         // If untilLock == LOCK_TIME add pieces to bs and return true
@@ -75,11 +80,6 @@ public class Tetromino {
     
     private static Map<Character, Color> init_col() {
         // Initializer for TETROMINO_COLORS
-        return null;
-    }
-    
-    private static Map<Character, Rotate> init_rot() {
-        // Initializer for TETROMINO_ROTATIONS
         return null;
     }
 }
