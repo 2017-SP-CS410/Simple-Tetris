@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tetris;
 
 import java.awt.Color;
@@ -14,7 +9,7 @@ public class Block {
     private static final int WIDTH  = 10;
     private static final int HEIGHT = 10;
 
-    //X and Y are not screen coordinates but game coordinates 
+    // X and Y are on a grid system based block width and height 
     public int x, y;
     public Color c;
 
@@ -26,10 +21,16 @@ public class Block {
     
     public void move(int x, int y) {
         // Adds to instance variables x, y
+        // 0 <= x <= 9
+        // 0 <= y <= 21
     }
     
     public void paint(Graphics g) {
-        
+        // Grid coordinate -> Screen coordinate
+        // (x*Width,y*Height)
     }
-
+    public Block copy() {
+        // Makes new Block with all the same values as this one.
+        return null;
+    }
 }
