@@ -19,18 +19,8 @@ public class Block {
         this.c = c;
     }
     
-    public void move(int x, int y) {
-        // Adds to instance variables x, y
-        // 0 <= x <= 9
-        // 0 <= y <= 21
-    }
-    
     public void paint(Graphics g) {
         // Grid coordinate -> Screen coordinate
         // (x*Width,y*Height)
-    }
-    public Block copy() {
-        // Makes new Block with all the same values as this one.
-        return null;
     }
 }

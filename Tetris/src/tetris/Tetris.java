@@ -1,17 +1,59 @@
 package tetris;
 
-import tetris.Tetrominos.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 public class Tetris extends javax.swing.JPanel {
-    
+
     private static Block[][] stack = new Block[22][10];
     private static int score = 0;
     private static Tetromino currentTet; // The falling Tetronimo
     private static int level = 0;
     private static double gravity = 0; // Speed at which currentTet false
-    private static boolean animation = false; // Is animation going on
-    private static int[] bag = new int[7]; // bag of Tetrominos
+    private static boolean animation = false; // Game or Animateion State
+
+    private int animationFrame = 0;
+
+    public Timer clock = new Timer(50, new ActionListener() {  // 50ms delay between ticks
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            tick();               // Write a method named tick to advance your game
+            jPanel1.repaint();
+        }
+    });
     
+    public void tick() {
+        // Move the Tetronimo with the gravity unless animating
+        // Graphics Template thing . animation with animation Frame
+    }
+
+    public static void deleteLines() {
+        // This gets called whenever a Tetromino gets locked it
+
+        // If there is not null things in stack[0] or stack[1] call gameover
+        // Check if there are full lines
+        // updateScore with the number of full lines
+        // change animation state
+        // 
+        // Call nextTetromino with a boolean of weather lines where cleared or not
+    }
+
+    public static void nextTetromino(boolean cleared) {
+        // replace current_Tet with a new Tetromino
+        // Increase Level If level % 100 != 99 (unless cleared)
+        // Increase Gravity by 2% of Max gravity for this block of levels
+    }
+
+    public static void updateScore(int lines) {
+        // Updates the score based on the number of lines cleared
+    }
+
+    public static void gameOver(boolean win) {
+        // This is the Game Over Sequence
+        // The Boolean win is used to discribe if the game has been won or lost
+    }
+
     public Tetris() {
         initComponents();
     }

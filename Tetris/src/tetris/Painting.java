@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.Tetrominos;
-
-import tetris.Block;
+package tetris;
 
 /**
  *
  * @author Brendan
  */
-public class TetrominoI extends Tetromino{
-
-    public TetrominoI() {
-        
-    }
-
+public interface Painting {
+    public void paint(Tetromino t);
+    public void paint(Block b);
+    public void animate(int frame);
+    public void changeBackground(int level);
 }

@@ -5,8 +5,6 @@
  */
 package tetris;
 
-import tetris.Tetrominos.Tetromino;
-
 /**
  *
  * @author Brendan
@@ -19,7 +17,7 @@ public class Tetris_old {
     
     private static Block[][] stack = new Block[22][10];
     private static int score = 0;
-    private static Tetromino current_Tet;
+    private static Tetromino currentTet;
     private static int level = 0;
     private static double gravity = 0;
     private static boolean animation = false;
@@ -33,13 +31,13 @@ public class Tetris_old {
         // a full line in the stack.
         // If there are delete them and call updateScore with the number of lines
         
-        // Call nextTetromino with a boolean of weather lines where cleared or not
+        // Call nextTetromino with a boolean of whether lines where cleared or not
     }
     
     public static void nextTetromino(boolean cleared) {
         // replace current_Tet with a new Tetromino
-        // Increase Level
-        // Incrase Gravity
+        // Increase Level If level % 100 != 99 (unless cleared)
+        // Increase Gravity by 2% of Max gravity for this block of levels
     }
     
     public static void updateScore(int lines) {
