@@ -6,14 +6,17 @@ import javax.swing.Timer;
 
 public class Tetris extends javax.swing.JPanel {
 
-    private static Block[][] stack = new Block[22][10];
-    private static int score = 0;
-    private static Tetromino currentTet; // The falling Tetronimo
-    private static int level = 0;
-    private static double gravity = 0; // Speed at which currentTet false
-    private static boolean animation = false; // Game or Animateion State
+    public static Block[][] stack = new Block[22][10];
+    public static int score = 0;
+    public static Tetromino currentTet; // The falling Tetronimo
+    public static int level = 0;
+    public static double gravity = 0; // Speed at which currentTet false
+    public static boolean animation = false; // Game or Animateion State
+    public enum State{
+        falling, locking, animation, paused
+    }
 
-    private int animationFrame = 0;
+    public int animationFrame = 0;
 
     public Timer clock = new Timer(50, new ActionListener() {  // 50ms delay between ticks
         @Override
@@ -22,10 +25,6 @@ public class Tetris extends javax.swing.JPanel {
             jPanel1.repaint();
         }
     });
-    
-    public enum State{
-        falling, locking, animation, paused
-    }
     
     public void tick() {
         // Move the Tetronimo with the gravity unless animating

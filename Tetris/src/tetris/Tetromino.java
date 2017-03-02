@@ -14,11 +14,6 @@ import tetris.Block;
  * @author Brendan
  */
 public class Tetromino {
-    
-    public static int lockTime = 20; // Time given before the piece locks on the stack
-    public int untilLock = lockTime; // Time until the piece locks
-    public boolean locking = false; // Is locking process going on
-    
     // The p@[] at index i desicribes the rotations state when rotationState == i. 
     public P2[][] rotations;  // Initialized in constructor, these are in grid coordinates!!!
     public int rotationState = 0;
@@ -27,9 +22,10 @@ public class Tetromino {
     
     
     
-    public Tetromino(P2[][] rotatations, P2 start) {
+    public Tetromino(P2[][] rotatations, P2 start, Color c) {
         this.rotations = rotations;
         this.current = start;
+        this.c = c;
     }
     public Tetromino tetI(P2 start, Color c){
         // You need to make the other 6 methods!!! 
@@ -38,7 +34,7 @@ public class Tetromino {
        return null; 
     }
     
-    public boolean drop(gameState go) {        
+    public boolean drop(GameState gs) {        
         // add gravity to the current y position.
         // Check if there are any intersections.
         // If there is subtract gravity and move the blocks down as far as you can
@@ -46,7 +42,7 @@ public class Tetromino {
         return false;
     }
     
-    public void horizontalMove(boolean d, gameState go) {
+    public void horizontalMove(boolean d, GameState gs) {
         // Make sure this is in grid coordinates
         // d is direction False: Left, True: Right
         // Change x by given d.
@@ -54,25 +50,16 @@ public class Tetromino {
         // Change x back if there is an intersection
     }
     
-    public void rotate(boolean d, gameState go) {
+    public void rotate(boolean d, GameState gs) {
         // False: counterclockwise (-1), True: clockwise (+1)
         // change rotation state by 1 based off of d
         // check if there are intsersection
         // If there is change rotation state back
     }
     
-    public boolean intersect(gameState go) {
+    public boolean intersect(GameState gs) {
         // When our grid coordinates are used to look at inside of block
         // If any of them are not null return false because there is an issue
         return true;
     }
-    
-//    public void paint(Graphics g) {
-//        // Delegate to the blocks of current
-//    }
-//    
-//    private void lock(Block[][] stack) {
-//        // Adds blocks in current to stack
-//        // Calls delete lines in main
-//    }
 }
