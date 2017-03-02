@@ -10,11 +10,11 @@ package tetris;
  * @author Brendan
  */
 public class GamePlay {
-    public void updateLevel(gameState gs, Integer lines) {
+    public void updateLevel(GameState gs, Integer lines) {
         // Update the level in gs based on the number of lines cleared
         // Update the gravity based the current level
     }
-    public void nextTet(gameState gs) {
+    public void nextTet(GameState gs) {
         // Abstract Factory
         // Randomly Generates a new Tetromino using the Static Factories inside Tetromino
     }

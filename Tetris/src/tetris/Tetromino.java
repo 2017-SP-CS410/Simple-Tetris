@@ -34,7 +34,7 @@ public class Tetromino {
        return null; 
     }
     
-    public boolean drop(gameState gs) {        
+    public boolean drop(GameState gs) {        
         // add gravity to the current y position.
         // Check if there are any intersections.
         // If there is subtract gravity and move the blocks down as far as you can
@@ -42,7 +42,7 @@ public class Tetromino {
         return false;
     }
     
-    public void horizontalMove(boolean d, gameState gs) {
+    public void horizontalMove(boolean d, GameState gs) {
         // Make sure this is in grid coordinates
         // d is direction False: Left, True: Right
         // Change x by given d.
@@ -50,14 +50,14 @@ public class Tetromino {
         // Change x back if there is an intersection
     }
     
-    public void rotate(boolean d, gameState gs) {
+    public void rotate(boolean d, GameState gs) {
         // False: counterclockwise (-1), True: clockwise (+1)
         // change rotation state by 1 based off of d
         // check if there are intsersection
         // If there is change rotation state back
     }
     
-    public boolean intersect(gameState gs) {
+    public boolean intersect(GameState gs) {
         // When our grid coordinates are used to look at inside of block
         // If any of them are not null return false because there is an issue
         return true;
