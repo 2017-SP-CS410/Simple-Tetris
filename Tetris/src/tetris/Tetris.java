@@ -23,6 +23,10 @@ public class Tetris extends javax.swing.JPanel {
         }
     });
     
+    public enum State{
+        falling, locking, animation, paused
+    }
+    
     public void tick() {
         // Move the Tetronimo with the gravity unless animating
         // Graphics Template thing . animation with animation Frame

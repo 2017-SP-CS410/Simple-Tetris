@@ -20,30 +20,33 @@ public class Tetromino {
     public boolean locking = false; // Is locking process going on
     
     // The p@[] at index i desicribes the rotations state when rotationState == i. 
-    public P2[][] rotations;  // Initialized in constructor
+    public P2[][] rotations;  // Initialized in constructor, these are in grid coordinates!!!
     public int rotationState = 0;
-    public P2 current = new P2(50, 0);
+    public P2 current;
     public Color c;
     
-    public Tetromino(P2[][] rotatations, boolean shift) {
+    
+    
+    public Tetromino(P2[][] rotatations, P2 start) {
         this.rotations = rotations;
-        this.current.x = shift ? this.current.x+5 : this.current.x;
+        this.current = start;
+    }
+    public Tetromino tetI(P2 start, Color c){
+        // You need to make the other 6 methods!!! 
+        //Make a new tetromino the rotation array coorisponding 
+        //with I and the color C that was given
+       return null; 
     }
     
-    public void drop(double v, Block[][] stack) {
-        // v is the downward velocity
-        // stack is the stack
-        
-        // Check if Tetromino is in locking state
-        // If untilLock is 0 call the lock method
-        // Decrament untilLock by 1 and don't do anything else
-        
-        // add v to the y value of current
+    public boolean drop(gameState go) {        
+        // add gravity to the current y position.
         // Check if there are any intersections.
-        // If there is subtract v and move the blocks down as far as you can
+        // If there is subtract gravity and move the blocks down as far as you can
+        // The return boolean tells whether the drop resulted in an intersection happening.
+        return false;
     }
     
-    public void horizontalMove(boolean d) {
+    public void horizontalMove(boolean d, gameState go) {
         // Make sure this is in grid coordinates
         // d is direction False: Left, True: Right
         // Change x by given d.
@@ -51,25 +54,25 @@ public class Tetromino {
         // Change x back if there is an intersection
     }
     
-    public void rotate(boolean d) {
+    public void rotate(boolean d, gameState go) {
         // False: counterclockwise (-1), True: clockwise (+1)
         // change rotation state by 1 based off of d
         // check if there are intsersection
         // If there is change rotation state back
     }
     
-    public boolean intersect(Block[][] stack) {
+    public boolean intersect(gameState go) {
         // When our grid coordinates are used to look at inside of block
         // If any of them are not null return false because there is an issue
         return true;
     }
     
-    public void paint(Graphics g) {
-        // Delegate to the blocks of current
-    }
-    
-    private void lock(Block[][] stack) {
-        // Adds blocks in current to stack
-        // Calls delete lines in main
-    }
+//    public void paint(Graphics g) {
+//        // Delegate to the blocks of current
+//    }
+//    
+//    private void lock(Block[][] stack) {
+//        // Adds blocks in current to stack
+//        // Calls delete lines in main
+//    }
 }

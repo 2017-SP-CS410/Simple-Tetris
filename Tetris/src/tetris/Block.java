@@ -19,8 +19,8 @@ public class Block {
         this.c = c;
     }
     
-    public void paint(Graphics g) {
-        // Grid coordinate -> Screen coordinate
-        // (x*Width,y*Height)
-    }
+//    public void paint(Graphics g) {
+//        // Grid coordinate -> Screen coordinate
+//        // (x*Width,y*Height)
+//    }
 }
