@@ -14,19 +14,19 @@ import java.awt.Graphics;
 public class Skin {
     public int animationFrame;
     
-    public void paint(GameState gs, Graphics g) {
+    public void paint(gameState gs, Graphics g) {
         // Draw the Tetromino inside of gs
         // Draw all the blocks in the stack in gs
     }
     
-    public boolean animate(GameState gs, Graphics g) {
+    public boolean animate(gameState gs, Graphics g) {
         // If animationFrame == 0 return true. Animation is done
         // Else decrement animationFrame
         // Do animation thing
         return false;
     }
     
-    public void background(GameState gs) {
+    public void background(gameState gs) {
         // Change the background based on the level inside of gs
     }
 }

@@ -11,7 +11,7 @@ import java.awt.Graphics;
  *
  * @author micalinscheid
  */
-public class GameState {
+public class gameState {
     public int score = 0;
     public double gravity = .01;
     public Tetris.State state;
