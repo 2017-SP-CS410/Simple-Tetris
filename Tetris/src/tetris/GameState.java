@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,6 +14,7 @@ import java.awt.Graphics;
  */
 public class GameState {
     public int score = 0;
+    public int level = 0;
     public double gravity = .01;
     public Tetris.State state;
     public int untilLock = 20;
@@ -21,7 +23,7 @@ public class GameState {
 //    public GamePlay gp;
 //    public Skin s;
     public Block[][] stack = new Block[21][9];
-    public Tetromino currentTen;
+    public Tetromino currentTet;
     
     public void tick() {
         // If state is falling call drop
