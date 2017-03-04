@@ -21,8 +21,8 @@ public class GameState {
     public int untilLock = 20;
     public int deletedLines[] = new int[4];
     // TODO
-//    public GamePlay gp;
-//    public Skin s;
+    public GamePlay gp;
+    public Skin s;
     public Block[][] stack = new Block[21][9];
     public Tetromino currentTet;
     
@@ -32,6 +32,33 @@ public class GameState {
         // Else if untilLock == 0. Call lock and deleteLines
         // If deleteLines returns true set state to animation
         // If it returns false set game state to falling and call newTet
+        
+        if(state == state.falling){
+            drop();
+        }
+        else if(state == state.locking){
+            if(untilLock != 0){
+                untilLock--;
+            }
+            else if(untilLock == 0){
+                lock();
+                deleteLines();
+                if(deleteLines() == true){
+                    state = state.animation;
+                }
+                else if(deleteLines() == false){
+                    state = state.falling;
+                    gp.nextTet(this);
+                }
+            }
+        }
+        
+        
+            
+        
+        
+        
+        
     }
     
     public void drop() {
@@ -72,21 +99,32 @@ public class GameState {
         // Find all the lines that needed to be deleted
         // Add those line numbers to deletedLines
         // return True if any lines where deleted else false
+        int numDelete = 0;
+        
+        
+        
+        
+        
+        
         return false;
     }
     
     public void update(int lines) {
-        // Updates score based on lines
+        // Updates score based on line
+        lines += deletedLines.length;
     }
     
     public void horiziontalMove(boolean dirc) {
         // dirc is direction False: Left, True: Right
         // Delegates to Tetromions horizontalMove
+        currentTet.horizontalMove(dirc, this);
+        
     }
     
     public void rotate(boolean dirc) {
         // dirc is direction False: counterclockwise, True: clockwise
         // Delegates to Tetromions rotate
+        currentTet.rotate(dirc, this);
     }
     
     public void paint(Graphics g) {
@@ -95,5 +133,18 @@ public class GameState {
         // Tell Skin object to animate
         // if the animation returns move everything in the stack above the deletedlines down
         // and call nextTet
+        s.paint(this, g);
+        
+        if(Tetris.animation == true){
+            s.animate(this, g);
+            for(int i = 0; i < stack.length; i++){
+                for(int j = 0; j < stack[i].length; j++){
+                    stack[i][j].y -= 1;
+                }
+            }
+                gp.nextTet(this);
+        }
+        
+        
     }
 }
