@@ -99,7 +99,23 @@ public class GameState {
         // Find all the lines that needed to be deleted
         // Add those line numbers to deletedLines
         // return True if any lines where deleted else false
-        int numDelete = 0;
+        
+        //honestly don't know exactly what to do here.
+        
+        int numBlk = 0;
+        Block b;
+        
+        for(int i = 0;  i < stack.length; i++){
+            for(int j = 0; j < stack[i].length; j++){
+                numBlk += stack[j].length;
+                
+                if(numBlk == 9){
+                    deletedLines[i] = i;
+                    
+                    return true;
+                }
+            }
+        }
         
         
         
