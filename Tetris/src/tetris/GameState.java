@@ -6,6 +6,7 @@
  */
 package tetris;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -35,11 +36,37 @@ public class GameState {
     
     public void drop() {
         // Delegates to the Tetronimo's drop. If that returns true set state to locking
+        
+      if( currentTet.drop(this) == true){
+          state = state.locking;
+      }
+      
     }
     
     public void lock() {
         // Breaks apart Tetromino into a bunch of Blocks and puts them into the stack
-    }
+        //use convPoint to get grid coordinates instead of screen coordinates
+        //use rotation state instance variable to get the rotation
+        //add point from ln 48 to all points in line 49 
+        //creates new coordinates to give each block
+        //add to stack  
+        
+        P2 [] rot = currentTet.rotations[currentTet.rotationState];
+        P2 gridP = currentTet.convPoint();
+        
+        for(int i = 0; i < rot.length; i++){
+            double x = rot[i].x + gridP.x;
+            double y = rot[i].y + gridP.y;
+                
+            for(int j = 0; j< stack.length; j++){
+                for(int k = 0; k < stack[j].length; k++){
+                    stack[j][k]= new Block((int)x,(int)y, Color.BLACK);
+                }
+            }
+        } 
+        
+    
+        }
     
     public boolean deleteLines() {
         // Find all the lines that needed to be deleted
