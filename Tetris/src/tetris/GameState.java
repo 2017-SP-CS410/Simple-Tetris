@@ -84,7 +84,7 @@ public class GameState {
         for(int i = 0; i < rot.length; i++){
             double x = rot[i].x + gridP.x;
             double y = rot[i].y + gridP.y;
-            stack[(int)y][(int)x]= new Block((int)x,(int)y, currentTet.Color);
+            stack[(int)y][(int)x]= new Block((int)x,(int)y, currentTet.c);
                 
             // for(int j = 0; j< stack.length; j++){
             //     for(int k = 0; k < stack[j].length; k++){
@@ -102,7 +102,7 @@ public class GameState {
         // return True if any lines where deleted else false
         
         //honestly don't know exactly what to do here.
-        
+        deletedLines = new int [4]; 
         int numBlk = 0;
         int index = 0;
         Block b;
@@ -117,6 +117,8 @@ public class GameState {
                     deletedLines[index] = i;
                     index++;
                 }
+            numBlk = 0;
+
         }
         if(index > 0){
             return true;
@@ -151,11 +153,17 @@ public class GameState {
         // and call nextTet
         s.paint(this, g);
         
-        if(this.animation == true){
+        if(this.state.animation == state.animation){
             if(s.animate(this, g)){
+                
+                for(int k = 0; k < deletedLines.length; k++){
+                    
+                }
+                
                 for(int i = 0; i < stack.length; i++){
-                for(int j = 0; j < stack[i].length; j++){
-                    stack[i][j].y -= 1;
+                    
+                    for(int j = 0; j < stack[i].length; j++){
+                    
                 }
             }
             
