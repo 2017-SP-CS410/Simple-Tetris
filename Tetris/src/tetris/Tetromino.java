@@ -20,7 +20,7 @@ public class Tetromino {
     public int rotationState = 0;
     public P2 current;
     public Color c;
-    public static boolean[] coverage = new boolean[100];
+    public static boolean[] coverage = new boolean[24];
   
     public Tetromino(P2[][] rotatations, P2 start, Color c) {
         coverage[0] = true;
@@ -209,20 +209,20 @@ public class Tetromino {
                 return true;
             }
             if (gs.stack[(int) (a.y + p.y)][(int) (a.x + p.x)] != null) {
-                coverage[23] = true;
+                coverage[22] = true;
                 return true;
 
             }
 
         }
-        coverage[24] = true;
+        coverage[23] = true;
 
         return false;
 
     }
 
     public P2 convPoint() {
-        coverage[25] = true;
+        coverage[24] = true;
         int gsx = (int) (this.current.x / 26);
         int gsy = (int) Math.ceil(this.current.y / 26);
         return new P2(gsx, gsy);
