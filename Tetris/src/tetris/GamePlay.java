@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class GamePlay {
     Random r = new Random();
-    int rand = r.nextInt(7);
+    
     
     
     
@@ -29,6 +29,7 @@ public class GamePlay {
     public void nextTet(GameState gs) {
         // Abstract Factory
         // Randomly Generates a new Tetromino using the Static Factories inside Tetromino
+        int rand = r.nextInt(7);
         P2 p = new P2(130, 0);
         Color c = Color.BLACK;
             switch(rand){
