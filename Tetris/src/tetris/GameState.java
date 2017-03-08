@@ -84,12 +84,13 @@ public class GameState {
         for(int i = 0; i < rot.length; i++){
             double x = rot[i].x + gridP.x;
             double y = rot[i].y + gridP.y;
+            stack[(int)y][(int)x]= new Block((int)x,(int)y, currentTet.Color);
                 
-            for(int j = 0; j< stack.length; j++){
-                for(int k = 0; k < stack[j].length; k++){
-                    stack[j][k]= new Block((int)x,(int)y, Color.BLACK);
-                }
-            }
+            // for(int j = 0; j< stack.length; j++){
+            //     for(int k = 0; k < stack[j].length; k++){
+                    
+            //     }
+            // }
         } 
         
     
@@ -103,24 +104,23 @@ public class GameState {
         //honestly don't know exactly what to do here.
         
         int numBlk = 0;
+        int index = 0;
         Block b;
         
         for(int i = 0;  i < stack.length; i++){
             for(int j = 0; j < stack[i].length; j++){
-                numBlk += stack[j].length;
-                
-                if(numBlk == 9){
-                    deletedLines[i] = i;
-                    
-                    return true;
+                if(stack[i][j] != null){
+                    numBlk++;
                 }
             }
+            if(numBlk == 10){
+                    deletedLines[index] = i;
+                    index++;
+                }
         }
-        
-        
-        
-        
-        
+        if(index > 0){
+            return true;
+        }
         
         return false;
     }
@@ -151,16 +151,18 @@ public class GameState {
         // and call nextTet
         s.paint(this, g);
         
-        if(Tetris.animation == true){
-            s.animate(this, g);
-            for(int i = 0; i < stack.length; i++){
+        if(this.animation == true){
+            if(s.animate(this, g)){
+                for(int i = 0; i < stack.length; i++){
                 for(int j = 0; j < stack[i].length; j++){
                     stack[i][j].y -= 1;
                 }
             }
-                gp.nextTet(this);
-        }
-        
-        
+            
+            gp.nextTet(this);
+            state = state.falling;
+
+            }     
+        }  
     }
 }
