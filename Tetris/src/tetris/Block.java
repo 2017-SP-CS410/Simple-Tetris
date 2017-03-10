@@ -6,8 +6,8 @@ import java.awt.Graphics;
 public class Block {
     
     //Width and Height of a block. May change when GUI is being made
-    private static final int WIDTH  = 26;
-    private static final int HEIGHT = 26;
+    private static final int WIDTH  = 10;
+    private static final int HEIGHT = 10;
 
     // X and Y are on a grid system based block width and height 
     public int x, y;

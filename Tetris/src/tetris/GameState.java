@@ -14,18 +14,28 @@ import java.awt.Graphics;
  * @author micalinscheid
  */
 public class GameState {
+    public enum State{
+        falling, locking, animation, paused
+    }
 
     public int score = 0;
     public int level = 0;
     public double gravity = .01;
-    public Tetris.State state;
+    public State state;
     public int untilLock = 20;
     public int deletedLines[] = new int[4];
     // TODO
     public GamePlay gp;
     public Skin s;
-    public Block[][] stack = new Block[21][9];
+    public Block[][] stack = new Block[22][10];
     public Tetromino currentTet;
+    
+    public GameState (GamePlay gp, Skin s) {
+        this.gp = gp;
+        this.s = s;
+        gp.nextTet(this);
+        this.state = State.falling;
+    }
 
     public void tick() {
         // If state is falling call drop
@@ -34,18 +44,18 @@ public class GameState {
         // If deleteLines returns true set state to animation
         // If it returns false set game state to falling and call newTet
 
-        if (state == state.falling) {
+        if (state == State.falling) {
             drop();
-        } else if (state == state.locking) {
+        } else if (state == State.locking) {
             if (untilLock != 0) {
                 untilLock--;
             } else if (untilLock == 0) {
                 lock();
                 deleteLines();
                 if (deleteLines() == true) {
-                    state = state.animation;
+                    state = State.animation;
                 } else if (deleteLines() == false) {
-                    state = state.falling;
+                    state = State.falling;
                     gp.nextTet(this);
                 }
             }
@@ -57,7 +67,7 @@ public class GameState {
         // Delegates to the Tetronimo's drop. If that returns true set state to locking
 
         if (currentTet.drop(this) == true) {
-            state = state.locking;
+            state = State.locking;
         }
 
     }
@@ -140,7 +150,7 @@ public class GameState {
         // and call nextTet
         s.paint(this, g);
 
-        if (this.state.animation == Tetris.State.animation) {
+        if (state.animation == State.animation) {
             if (s.animate(this, g)) {
 
                 for (int i : deletedLines) {
@@ -153,8 +163,16 @@ public class GameState {
             }
 
                 gp.nextTet(this);
-                state = state.falling;
+                state = State.falling;
 
+            }
+        }
+    }
+    
+    public void testWell() {
+        for (int i = 0; i < stack.length; i++) {
+            for (int j = 0; j < stack[i].length; j++) {
+                stack[i][j] = new Block(j, i, Color.red);
             }
         }
     }

@@ -10,7 +10,7 @@ package tetris;
  * @author Brendan
  */
 public class P2 {
-    public static boolean coverage[] = new boolean[2];
+    public static boolean coverage[] = new boolean[3];
     // This is screen coordinates
     public double x, y;
     
@@ -25,5 +25,10 @@ public class P2 {
         double nx = this.x + other.x;
         double ny = this.y + other.y;
         return new P2(nx, ny);
+    }
+    
+    public P2 scalar(int a) {
+        coverage[2] = true;
+        return new P2(x * a, y * a);
     }
 }

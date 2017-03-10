@@ -30,28 +30,28 @@ public class GamePlay {
         // Abstract Factory
         // Randomly Generates a new Tetromino using the Static Factories inside Tetromino
         int rand = r.nextInt(7);
-        P2 p = new P2(130, 0);
-        Color c = Color.BLACK;
+        P2 p = new P2(130, -52);
+        Color c = Color.WHITE;
             switch(rand){
-                case '0': 
+                case 0: 
                     gs.currentTet = Tetromino.tetI(p, c);
                     break;
-                case '1':
+                case 1:
                     gs.currentTet = Tetromino.tetL(p, c);
                     break;
-                case '2':
+                case 2:
                     gs.currentTet = Tetromino.tetS(p, c);
                     break;
-                case '3':
+                case 3:
                     gs.currentTet = Tetromino.tetZ(p, c);
                     break;
-                case '4':
+                case 4:
                     gs.currentTet = Tetromino.tetO(p, c);
                     break;
-                case '5': 
+                case 5: 
                     gs.currentTet = Tetromino.tetJ(p, c);
                     break;
-                case '6':
+                case 6:
                     gs.currentTet = Tetromino.tetT(p, c);
             } 
     

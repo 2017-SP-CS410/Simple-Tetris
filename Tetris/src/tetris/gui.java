@@ -5,17 +5,45 @@
  */
 package tetris;
 
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 /**
  *
  * @author Luke
  */
 public class gui extends javax.swing.JFrame {
 
+    GameState gs = new GameState(new GamePlay(), new Skin());
+    public Timer clock = new Timer(50, new ActionListener() {  // 50ms delay between ticks
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            tick();
+        }
+    });
+    
     /**
      * Creates new form gui
      */
     public gui() {
         initComponents();
+        gs.testWell();
+    }
+    
+    public class MyPanel extends JPanel {
+
+        @Override
+        public void paint(Graphics g) {
+            super.paint(g);
+            gs.paint(g);
+        }
+    }
+    
+    public void tick() {
+        this.repaint();
     }
 
     /**
@@ -27,7 +55,7 @@ public class gui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new MyPanel();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
