@@ -21,7 +21,7 @@ public class Tetromino {
     public P2 current;
     public Color c;
     public static boolean[] coverage = new boolean[24];
-  
+
     public Tetromino(P2[][] rotatations, P2 start, Color c) {
         coverage[0] = true;
         this.rotations = rotations;
@@ -139,15 +139,39 @@ public class Tetromino {
         if (this.intersect(gs)) {
             coverage[9] = true;
             current.y -= gs.gravity;
-            for (P2 a : this.rotations[this.rotationState]){
-               int newY = (int) (a.y + p.y);
-               int newX = (int) (a.y + p.y);
+            double minX = 11;
+            double maxX = -1;
+            double lowY = -1;
+            for (P2 a : this.rotations[this.rotationState]) {
+                
+                if (a.x + p.x < minX) {
+                    minX = a.x + p.x;
+                                   }
+                if (a.x + p.x> maxX) {
+                    maxX = a.x + p.x;
+                }
+
             }
+
+            for (int i = 0; i < 22; i++) {
+                for (int j = (int)minX; j < (int)maxX; j++) {
+                    if (gs.stack[i][j].y < lowY) {
+                        lowY = gs.stack[i][j].y;
+                    }
+                }
+            }
+            lowY = lowY * 26;
+            
+            double difference = lowY - current.y;
+            current.y = current.y + difference;
+            
+            
+            
+               
 
             return true;
         }
-        
-        
+
         coverage[10] = true;
         return false;
     }
@@ -211,7 +235,6 @@ public class Tetromino {
             if (gs.stack[(int) (a.y + p.y)][(int) (a.x + p.x)] != null) {
                 coverage[22] = true;
                 return true;
-
             }
 
         }
@@ -223,7 +246,7 @@ public class Tetromino {
 
     public P2 convPoint() {
         coverage[24] = true;
-        int gsx = (int) (this.current.x / 26);
+        int gsx = (int) Math.floor(this.current.x / 26);
         int gsy = (int) Math.ceil(this.current.y / 26);
         return new P2(gsx, gsy);
     }
