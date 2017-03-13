@@ -100,11 +100,11 @@ public class GameState {
         // Find all the lines that needed to be deleted
         // Add those line numbers to deletedLines
         // return True if any lines where deleted else false
+        
+        this.deletedLines[] = {-1, -1, -1, -1};
 
-        //honestly don't know exactly what to do here.
         int numBlk = 0;
         int index = 0;
-        Block b;
 
         for (int i = 0; i < stack.length; i++) {
             for (int j = 0; j < stack[i].length; j++) {
@@ -154,17 +154,17 @@ public class GameState {
             if (s.animate(this, g)) {
 
                 for (int i : deletedLines) {
-                    for (int k = i; k <= 0; k--) {
-                        for (int j = 0; j < 10; j++) {
-                            stack[k][j] = stack[k-1][j];
-                            stack[k][j].y -= 1;
+                    if (i != -1) {
+                        for (int k = i; k <= 0; k--) {
+                            for (int j = 0; j < 10; j++) {
+                                stack[k][j] = stack[k-1][j];
+                                stack[k][j].y -= 1;
+                            }
+                        }
                     }
                 }
-            }
-
                 gp.nextTet(this);
                 state = State.falling;
-
             }
         }
     }
