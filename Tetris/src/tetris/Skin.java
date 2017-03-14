@@ -13,7 +13,8 @@ import java.awt.Color;
  * @author Brendan
  */
 public class Skin {
-    public int animationFrame;
+    public int animationFrame = 20;
+    private int animCount = 5;
     
     public void paint(GameState gs, Graphics g) {
         Tetromino c = gs.currentTet;
@@ -43,6 +44,24 @@ public class Skin {
         // If animationFrame == 0 return true. Animation is done
         // Else decrement animationFrame
         // Do animation thing
+        if (animationFrame <= 0) {
+            return true;
+        }
+        
+        int[] lines = gs.deletedLines;
+        if (animCount <= 0) {
+            g.setColor(Color.WHITE);
+            animCount = 5;
+        } else {
+            g.setColor(Color.BLACK);
+        }
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i] != -1) {
+                g.fillRect(0, lines[i] * 26, 260, 26);
+            }
+        }
+        animCount--;
+        animationFrame--;
         return false;
     }
     

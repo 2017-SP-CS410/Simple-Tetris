@@ -23,7 +23,7 @@ public class GameState {
     public double gravity = .01;
     public State state;
     public int untilLock = 20;
-    public int deletedLines[] = new int[4];
+    public int deletedLines[] = {-1,-1,-1,-1};
     // TODO
     public GamePlay gp;
     public Skin s;
@@ -101,7 +101,7 @@ public class GameState {
         // Add those line numbers to deletedLines
         // return True if any lines where deleted else false
         
-        this.deletedLines[] = {-1, -1, -1, -1};
+        resetLines();
 
         int numBlk = 0;
         int index = 0;
@@ -174,6 +174,17 @@ public class GameState {
             for (int j = 0; j < stack[i].length; j++) {
                 stack[i][j] = new Block(j, i, Color.red);
             }
+        }
+    }
+    
+    public void testAnim() {
+        deletedLines[0] = 3;
+        state = State.animation;
+    }
+    
+    public void resetLines() {
+        for(int i = 0; i < deletedLines.length; i++) {
+            deletedLines[i] = -1;
         }
     }
 }

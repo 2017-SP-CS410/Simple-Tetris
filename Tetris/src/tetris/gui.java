@@ -31,6 +31,8 @@ public class gui extends javax.swing.JFrame {
     public gui() {
         initComponents();
         gs.testWell();
+        gs.testAnim();
+        clock.start();
     }
     
     public class MyPanel extends JPanel {
@@ -44,6 +46,7 @@ public class gui extends javax.swing.JFrame {
     
     public void tick() {
         this.repaint();
+        gs.tick();
     }
 
     /**
