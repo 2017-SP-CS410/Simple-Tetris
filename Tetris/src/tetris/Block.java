@@ -1,9 +1,10 @@
 package tetris;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 public class Block {
+    
+    public static boolean[] coverage = new boolean[1];
     
     //Width and Height of a block. May change when GUI is being made
     private static final int WIDTH  = 10;
@@ -14,6 +15,7 @@ public class Block {
     public Color c;
 
     public Block(int x, int y, Color c) {
+        coverage[0] = true;
         this.x = x;
         this.y = y;
         this.c = c;
