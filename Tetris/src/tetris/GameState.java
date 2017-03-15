@@ -136,6 +136,7 @@ public class GameState {
         }
         if (index > 0) {
             coverage[14] = true;
+            update(index)
             return true;
         }
 
@@ -145,7 +146,7 @@ public class GameState {
     public void update(int lines) {
         coverage[15] = true;
         // Updates score based on line
-        lines += deletedLines.length;
+        gp.updateLevel(this, lines);
     }
 
     public void horiziontalMove(boolean dirc) {
