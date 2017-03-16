@@ -14,16 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tetris;
 
 import java.awt.Color;
 
 /**
  * Tetromino represents the set of blocks while they are falling
+ *
  * @author Team2
  */
 public class Tetromino {
+
     // Array to keep track of what code has run in this class
     public static boolean[] coverage = new boolean[25];
 
@@ -32,9 +33,10 @@ public class Tetromino {
     public int rotationState = 0;
     public P2 current;  // Position of the Tetromino (screen coordinates)
     public Color c;
-  
+
     /**
      * Simple constructor for a Tetromino
+     *
      * @param rotations Describes the possible rotations
      * @param start The starting position of the Tetromino
      * @param c The Color of the Tetromino
@@ -48,6 +50,7 @@ public class Tetromino {
 
     /**
      * Static Factory to make an I piece
+     *
      * @param start The starting position of the Tetromino
      * @param c The Color of the Tetromino
      * @return An I Tetromino at position start and color c
@@ -67,6 +70,7 @@ public class Tetromino {
 
     /**
      * Static Factory to make a J piece
+     *
      * @param start The starting position of the Tetromino
      * @param c The Color of the Tetromino
      * @return A J Tetromino at position start and color c
@@ -85,6 +89,7 @@ public class Tetromino {
 
     /**
      * Static Factory to make a L piece
+     *
      * @param start The starting position of the Tetromino
      * @param c The Color of the Tetromino
      * @return A L Tetromino at position start and color c
@@ -103,6 +108,7 @@ public class Tetromino {
 
     /**
      * Static Factory to make an O piece
+     *
      * @param start The starting position of the Tetromino
      * @param c The Color of the Tetromino
      * @return An O Tetromino at position start and color c
@@ -118,6 +124,7 @@ public class Tetromino {
 
     /**
      * Static Factory to make a S piece
+     *
      * @param start The starting position of the Tetromino
      * @param c The Color of the Tetromino
      * @return A S Tetromino at position start and color c
@@ -136,6 +143,7 @@ public class Tetromino {
 
     /**
      * Static Factory to make a T piece
+     *
      * @param start The starting position of the Tetromino
      * @param c The Color of the Tetromino
      * @return A T Tetromino at position start and color c
@@ -154,6 +162,7 @@ public class Tetromino {
 
     /**
      * Static Factory to make a Z piece
+     *
      * @param start The starting position of the Tetromino
      * @param c The Color of the Tetromino
      * @return A Z Tetromino at position start and color c
@@ -174,41 +183,66 @@ public class Tetromino {
      * Tries to drop the Tetromino by the gravity stored inside of GameState gs
      * If an intersection occurs the put the Tetromion down as far as possible
      * And return true if there was an intersection false if there wasn't
+     *
      * @param gs The current GameState
      * @return Was there an intersection or not
      */
     public boolean drop(GameState gs) {
-        coverage[8] = true;
-        
-        P2 p = convPoint();  // gets the screen coordinates of current point
 
-        double prev = current.y;  // Old y value
-        current.y += gs.gravity;  // Move the tetromino by gravity
+        // add gravity to the current y position.
+        // Check if there are any intersections.
+        // If there is subtract gravity and move the blocks down as far as you can
+        // The return boolean tells whether the drop resulted in an intersection happening.
+        coverage[8] = true;
+        P2 p = convPoint();
+
+        double prev = current.y;
+        current.y += gs.gravity;
         if (this.intersect(gs)) {
-            // Is there an intersection
             coverage[9] = true;
-            current.y -= gs.gravity;  // Undo the move
-            // TODO
-            for (P2 a : this.rotations[this.rotationState]){
-               int newY = (int) (a.y + p.y);
-               int newX = (int) (a.y + p.y);
+            current.y -= gs.gravity;
+            double minX = 11;
+            double maxX = -1;
+            double lowY = -1;
+            for (P2 a : this.rotations[this.rotationState]) {
+
+                if (a.x + p.x < minX) {
+                    minX = a.x + p.x;
+                }
+                if (a.x + p.x > maxX) {
+                    maxX = a.x + p.x;
+                }
+
             }
+
+            for (int i = 0; i < 22; i++) {
+                for (int j = (int) minX; j < (int) maxX; j++) {
+                    if (gs.stack[i][j].y < lowY) {
+                        lowY = gs.stack[i][j].y;
+                    }
+                }
+            }
+            lowY = lowY * 26;
+
+            double difference = lowY - current.y;
+            current.y = current.y + difference;
 
             return true;
         }
+
         coverage[10] = true;
-        
         return false;
     }
 
     /**
      * Tries to move the Tetromino by the given direction d
+     *
      * @param d Direction to move False: Left, True: Right
      * @param gs Current Game State
      */
     public void horizontalMove(boolean d, GameState gs) {
         coverage[11] = true;
-        
+
         double prev = current.x;  // Previous x value
         if (d == false) {
             coverage[12] = true;
@@ -227,14 +261,15 @@ public class Tetromino {
 
     /**
      * Tries to rotate the Tetromino by the given direction d
+     *
      * @param d The direction to rotate False: counterclockwise, True: clockwise
      * @param gs The current GameState
      */
     public void rotate(boolean d, GameState gs) {
         coverage[15] = true;
-        
+
         int prev = this.rotationState;  // Old rotationState
-        
+
         if (d == false) {
             coverage[16] = true;
             this.rotationState = (this.rotationState - 1) % this.rotations[rotationState].length;
@@ -242,7 +277,7 @@ public class Tetromino {
             coverage[17] = true;
             this.rotationState = (this.rotationState + 1) % this.rotations[rotationState].length;
         }
-        
+
         if (this.intersect(gs)) {
             // If there is an intersection
             coverage[18] = true;
@@ -254,15 +289,15 @@ public class Tetromino {
 
     /**
      * Looks to see if any of the Blocks that make up the Tetromino are
-     * occupying the same space as another Block in the Stack or is past
-     * the walls or the bottom
-     * 
+     * occupying the same space as another Block in the Stack or is past the
+     * walls or the bottom
+     *
      * @param gs The current GameState
      * @return Is there an intersection or not
      */
     public boolean intersect(GameState gs) {
         coverage[19] = true;
-        
+
         P2 p = convPoint();  // Convert current to grid coordinates
 
         for (P2 a : this.rotations[this.rotationState]) {
@@ -278,7 +313,7 @@ public class Tetromino {
                 return true;
             }
         }
-        
+
         coverage[23] = true;
 
         return false;
@@ -286,6 +321,7 @@ public class Tetromino {
 
     /**
      * Converts the current point into grid coordinates non-destructively
+     *
      * @return The new Point in grid coordinates
      */
     public P2 convPoint() {
