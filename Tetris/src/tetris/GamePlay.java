@@ -35,7 +35,7 @@ public class GamePlay {
     public static Random r = new Random();
 
     /**
-     * Used to update both the level and gravity based on the number of lines 
+     * Used to update both the level and gravity based on the number of lines
      * cleared and other information stored in the GameState.
      * <p>
      * In this basic version the level is increased by 1 and gravity is
@@ -57,7 +57,7 @@ public class GamePlay {
      * An Abstract factory for picking the next Tetromino.
      * <p>
      * In this basic version the next Tetromino is picked at random.
-     * 
+     *
      * @param gs
      */
     public void nextTet(GameState gs) {

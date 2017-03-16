@@ -26,7 +26,7 @@ import java.awt.Color;
 public class Tetromino {
 
     // Array to keep track of what code has run in this class
-    public static boolean[] coverage = new boolean[25];
+    public static boolean[] coverage = new boolean[100];
 
     // This is a list of possible rotation states (grid coordinates)
     public P2[][] rotations;
@@ -188,11 +188,6 @@ public class Tetromino {
      * @return Was there an intersection or not
      */
     public boolean drop(GameState gs) {
-
-        // add gravity to the current y position.
-        // Check if there are any intersections.
-        // If there is subtract gravity and move the blocks down as far as you can
-        // The return boolean tells whether the drop resulted in an intersection happening.
         coverage[8] = true;
         P2 p = convPoint();
 
@@ -205,24 +200,29 @@ public class Tetromino {
             double maxX = -1;
             double lowY = -1;
             for (P2 a : this.rotations[this.rotationState]) {
-
+                coverage[25] = true;
                 if (a.x + p.x < minX) {
+                    coverage[26] = true;
                     minX = a.x + p.x;
                 }
                 if (a.x + p.x > maxX) {
+                    coverage[27] = true;
                     maxX = a.x + p.x;
                 }
 
             }
 
             for (int i = 0; i < 22; i++) {
+                coverage[28] = true;
                 for (int j = (int) minX; j < (int) maxX; j++) {
+                    coverage[29] = true;
                     if (gs.stack[i][j].y < lowY) {
+                        coverage[30] = true;
                         lowY = gs.stack[i][j].y;
                     }
                 }
             }
-            lowY = lowY * 26;
+            lowY = lowY * Block.HEIGHT;
 
             double difference = lowY - current.y;
             current.y = current.y + difference;
@@ -246,10 +246,10 @@ public class Tetromino {
         double prev = current.x;  // Previous x value
         if (d == false) {
             coverage[12] = true;
-            current.x = current.x - 10;
+            current.x = current.x - Block.WIDTH;
         } else if (d == true) {
             coverage[13] = true;
-            current.x = current.x + 10;
+            current.x = current.x + Block.WIDTH;
         }
 
         if (this.intersect(gs)) {
@@ -281,9 +281,13 @@ public class Tetromino {
         if (this.intersect(gs)) {
             // If there is an intersection
             coverage[18] = true;
-            this.rotationState = prev;
+            if (!kick(d, gs)) {
+                coverage[31] = true;
+                this.rotationState = prev;
+            }
+
         }
-        // change to conditional assignment ie: http://www.cafeaulait.org/course/week2/43.html        
+        // change to conditional assignment ie: http://www.cafeaulait.org/course/week2/43.html
 
     }
 
@@ -320,14 +324,103 @@ public class Tetromino {
     }
 
     /**
+     * the kick method moves the Tetronimo to a kick space if it doesn't
+     * intersect anything, if it does then it moves it back to the original
+     *
+     * @param b The direction to rotate False: counterclockwise, True: clockwise
+     * @param s The current GameState
+     * @return True = kick was successful; False = kick was NOT successful
+     */
+    public boolean kick(boolean b, GameState s) {
+        coverage[32] = true;
+        P2[] transitions = {new P2(0, 0), new P2(0, 0), new P2(0, 1), new P2(0, 2)};
+        if (b) {
+            coverage[33] = true;
+            transitions[0] = new P2(-1, 0);
+            transitions[1] = new P2(-1, -1);
+        } else {
+            coverage[34] = true;
+            transitions[0] = new P2(1, 0);
+            transitions[1] = new P2(1, -1);
+        }
+
+        for (P2 t : transitions) {
+            coverage[35] = true;
+            current = current.add(t.scale(Block.WIDTH));
+            if (!intersect(s)) {
+                coverage[36] = true;
+                return true;
+            } else {
+                coverage[37] = true;
+                current = current.add(t.scale(-Block.WIDTH));
+
+            }
+        }
+        coverage[38] = true;
+        return false;
+
+        //This is the back-up code in case kick method code does not work correctly
+//        if (b == true) { // clockwise rotation
+//            current.x = current.x - 26; //move to stage 1
+//            if (intersect(s)) {
+//                current.y = current.y - 26; // move to stage 2
+//                if (intersect(s)) {
+//                    current.y = current.y + 2 * 26; // move to state 3
+//                    current.x = current.x + 26;
+//                    if (intersect(s)) {
+//                        current.y = current.y + 26; // move to state 4
+//                        if (intersect(s)) {
+//                            current.y = current.y - 2 * 26; // return to original pos
+//                            return false;
+//                        } else {
+//                            return true;
+//                        }
+//                    } else {
+//                        return true;
+//                    }
+//                } else {
+//                    return true;
+//                }
+//            } else {
+//                return true;
+//            }
+//
+//        } else { //counterclockwise rotation
+//            current.x = current.x + 26; // move to stage 1
+//            if (intersect(s)) {
+//                current.y = current.y - 26; // move stage 2
+//                if (intersect(s)) {
+//                    current.y = current.y + 2 * 26;
+//                    current.x = current.x - 26; // move to stage 3
+//                    if (intersect(s)) {
+//                        current.y = current.y + 26; // move to stage 4
+//                        if (intersect(s)) {
+//                            current.y = current.y - 2 * 26; // return to original pos
+//                            return false;
+//                        } else {
+//                            return true;
+//                        }
+//                    } else {
+//                        return true;
+//                    }
+//                } else {
+//                    return true;
+//                }
+//            } else {
+//                return true;
+//            }
+//        }
+    }
+
+    /**
      * Converts the current point into grid coordinates non-destructively
      *
      * @return The new Point in grid coordinates
      */
     public P2 convPoint() {
         coverage[24] = true;
-        int gsx = (int) (this.current.x / 26);
-        int gsy = (int) Math.ceil(this.current.y / 26);
+        int gsx = (int) (this.current.x / Block.WIDTH);
+        int gsy = (int) Math.ceil(this.current.y / Block.HEIGHT);
         return new P2(gsx, gsy);
     }
 }

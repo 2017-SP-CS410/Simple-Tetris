@@ -14,22 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tetris;
 
 import java.awt.Color;
 
 /**
  * Blocks are used as a wrapper for a x, y position in grid space and a Color c
+ *
  * @author Architects
  */
 public class Block {
+
     // Array to keep track of what code has run in this class
     public static boolean[] coverage = new boolean[1];
-    
+
     // Width and Height of a block
-    private static final int WIDTH  = 26;
-    private static final int HEIGHT = 26;
+    public static final int WIDTH = 26;
+    public static final int HEIGHT = 26;
 
     // X and Y are on the grid space
     public int x, y;
@@ -37,6 +38,7 @@ public class Block {
 
     /**
      * Simple Block Constructor
+     *
      * @param x X coordinate (grid space)
      * @param y Y coordinate (grid space)
      * @param c Color of specified block

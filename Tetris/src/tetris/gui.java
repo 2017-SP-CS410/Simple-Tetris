@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tetris;
 
 import java.awt.Graphics;
@@ -27,7 +26,6 @@ import javax.swing.Timer;
  *
  * @author Team3
  */
-
 public class gui extends javax.swing.JFrame {
 
     GameState gs = new GameState(new GamePlay(), new Skin());
@@ -37,7 +35,7 @@ public class gui extends javax.swing.JFrame {
             tick();
         }
     });
-    
+
     /**
      * Creates new form gui
      */
@@ -47,7 +45,7 @@ public class gui extends javax.swing.JFrame {
         gs.testAnim();
         clock.start();
     }
-    
+
     public class MyPanel extends JPanel {
 
         @Override
@@ -56,7 +54,7 @@ public class gui extends javax.swing.JFrame {
             gs.paint(g);
         }
     }
-    
+
     public void tick() {
         gs.tick();
         this.repaint();
@@ -132,11 +130,15 @@ public class gui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
-        switch(evt.getKeyCode()) {
-            case VK_A: break;
-            case VK_A: break;
-            case VK_A: break;
-            case VK_A: break;
+        switch (evt.getKeyCode()) {
+            case VK_A:
+                break;
+            case VK_A:
+                break;
+            case VK_A:
+                break;
+            case VK_A:
+                break;
         }
     }//GEN-LAST:event_jPanel1KeyReleased
 

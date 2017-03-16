@@ -108,10 +108,10 @@ public class Skin {
 
     /**
      * Determines the background based on the level inside of GameState gs
-     * 
+     *
      * @param gs The current GameState
      */
     public void background(GameState gs) {
-        
+
     }
 }
