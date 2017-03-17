@@ -16,8 +16,10 @@
  */
 package tetris;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics2D;
 
 /**
  * The methods related to painting that can be changed between different
@@ -28,9 +30,18 @@ import java.awt.Color;
  */
 public class Skin {
 
+    public static boolean[] coverage = new boolean[16];
+    
     public int animationFrame = 20;  // Number of frames for an animation
-    // I don't think this is needed you can animationFrame % 5.
-    private int animCount = 5;
+    public int colorIndex = 0; // Index for cycling colors
+    public int animCount = 5;
+    public int colorCount = 3;
+    
+    private int r[] = {255, 50, 128, 83, 255, 190, 51, 242, 202, 255};
+
+    private int gr[] = {224, 126, 10, 145, 172, 223, 102, 30, 114, 255};
+
+    private int b[] = {48, 122, 6, 60, 68, 232, 147, 29, 102, 255};
 
     /**
      * paints the row and current Tetromino inside of the GameState gs.
@@ -41,17 +52,23 @@ public class Skin {
      * @param g Graphics context
      */
     public void paint(GameState gs, Graphics g) {
+        coverage[0] = true;
         Tetromino c = gs.currentTet;
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(4));
         // Loop through blocks inside the stack
         for (Block[] row : gs.stack) {
+            coverage[1] = true;
             for (Block b : row) {
+                coverage[2] = true;
                 if (b != null) {
+                    coverage[3] = true;
                     // If b is not null draw it
-                    g.setColor(b.c);  // Sets color from Block b
+                    g2.setColor(b.c);  // Sets color from Block b
                     // Draws a 26 x 26 rectangle Block b's X and Y
-                    g.fillRect(b.x * 26, b.y * 26, 26, 26);
-                    g.setColor(Color.BLACK);  // Sets color for the border
-                    g.drawRect(b.x * 26, b.y * 26, 25, 25);  // Draws the border
+                    g2.fillRect(b.x * 26, b.y * 26, 26, 26);
+                    g2.setColor(Color.BLACK);  // Sets color for the border
+                    g2.drawRect(b.x * 26, b.y * 26, 25, 25);  // Draws the border
                 }
             }
         }
@@ -60,14 +77,15 @@ public class Skin {
             Tetromino and draws a square and border based of that.
          */
         for (int k = 0; k < 4; k++) {
-            g.setColor(c.c);  // Sets the color to the Tetromino color
+            coverage[4] = true;
+            g2.setColor(c.c);  // Sets the color to the Tetromino color
             // Finds the grab point
             P2 tetBlockGrab = c.current.add((c.rotations[c.rotationState][k]).scale(26));
             // Draws a rectangle based off the block size
-            g.fillRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 26, 26);
-            g.setColor(Color.BLACK);  // Sets color for the border
+            g2.fillRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 26, 26);
+            g2.setColor(Color.BLACK);  // Sets color for the border
             // Draws a border
-            g.drawRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 25, 25);
+            g2.drawRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 25, 25);
         }
     }
 
@@ -83,21 +101,27 @@ public class Skin {
      * @return The boolean to say if the animation is done or not
      */
     public boolean animate(GameState gs, Graphics g) {
+        coverage[5] = true;
         if (animationFrame <= 0) {
+            coverage[6] = true;
             // If the animation is done return true
             return true;
         }
 
         int[] lines = gs.deletedLines;  // Indecies of deleted lines
         if (animCount <= 0) {
+            coverage[7] = true;
             g.setColor(Color.WHITE);
             animCount = 5;
         } else {
+            coverage[8] = true;
             g.setColor(Color.BLACK);
         }
-        // TODO use an itterator loop here
+
         for (int i = 0; i < lines.length; i++) {
+            coverage[9] = true;
             if (lines[i] != -1) {
+                coverage[10] = true;
                 g.fillRect(0, lines[i] * 26, 260, 26);
             }
         }
@@ -111,7 +135,33 @@ public class Skin {
      *
      * @param gs The current GameState
      */
-    public void background(GameState gs) {
+    public void background(GameState gs, Graphics g) {
+        coverage[11] = true;
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(2));
+        
+        g2.setColor(new Color(r[colorIndex],gr[colorIndex],b[colorIndex]));
+        
+        for (int i = 0; i < 520; i += 26) {
+            coverage[12] = true;
+            for (int j = 0; j < 260; j += 26) {
+                coverage[13] = true;
+                g2.drawRect(j, i, 25, 25);
+            }
+        }
+        
+        if (colorCount <= 0) {
+            coverage[14] = true;
+            colorIndex++;
+            colorCount = 3;
 
+            if (colorIndex > 9) {
+                coverage[15] = true;
+                colorIndex = 0;
+            }
+        }
+        
+        colorCount--;
+        
     }
 }
