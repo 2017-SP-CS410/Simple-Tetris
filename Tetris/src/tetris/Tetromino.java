@@ -189,10 +189,12 @@ public class Tetromino {
      */
     public boolean drop(GameState gs) {
         coverage[8] = true;
-        P2 p = convPoint();
-
+        
         double prev = current.y;
         current.y += gs.gravity;
+        
+        P2 p = convPoint();
+        
         if (this.intersect(gs)) {
             coverage[9] = true;
             current.y -= gs.gravity;

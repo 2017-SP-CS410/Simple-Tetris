@@ -58,7 +58,6 @@ public class gui extends javax.swing.JFrame {
     }
 
     public void tick() {
-        System.out.println("running");
         gs.tick();
         this.repaint();
     }
