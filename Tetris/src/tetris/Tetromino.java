@@ -311,6 +311,9 @@ public class Tetromino {
                 coverage[21] = true;
                 return true;
             }
+            if((int)(a.y + p.y) < 0){
+                return false;
+            }
             if (gs.stack[(int) (a.y + p.y)][(int) (a.x + p.x)] != null) {
                 // Check for an intsection with the Stack
                 coverage[22] = true;
