@@ -306,7 +306,7 @@ public class Tetromino {
 
         for (P2 a : this.rotations[this.rotationState]) {
             coverage[20] = true;
-            if (a.x + p.x < 0 || a.x + p.x >= 9 || a.y + p.y >= 21) {
+            if (a.x + p.x < 0 || a.x + p.x > 10 || a.y + p.y > 20) {
                 // Check for sides and bottom
                 coverage[21] = true;
                 return true;
