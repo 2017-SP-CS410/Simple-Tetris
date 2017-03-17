@@ -37,13 +37,15 @@ public class gui extends javax.swing.JFrame {
     });
 
     /**
-     * Creates new form gui
+     * Creates new form GUI
      */
     public gui() {
         initComponents();
+        addKeyListener(new InputKeyEvent());
         gs.testWell();
         gs.testAnim();
         clock.start();
+
     }
 
     public class MyPanel extends JPanel {
@@ -61,6 +63,7 @@ public class gui extends javax.swing.JFrame {
         gs.tick();
     }
 
+    //Key binding for controlling the game
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,11 +80,6 @@ public class gui extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(260, 520));
-        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jPanel1KeyReleased(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,19 +126,6 @@ public class gui extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
-        switch (evt.getKeyCode()) {
-            case VK_A:
-                break;
-            case VK_A:
-                break;
-            case VK_A:
-                break;
-            case VK_A:
-                break;
-        }
-    }//GEN-LAST:event_jPanel1KeyReleased
 
     /**
      * @param args the command line arguments

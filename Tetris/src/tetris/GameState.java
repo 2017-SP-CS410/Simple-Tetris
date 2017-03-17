@@ -181,7 +181,7 @@ public class GameState {
      *
      * @param dirc Direction to move False: Left, True: Right
      */
-    public void horiziontalMove(boolean dirc) {
+    public void horizontalMove(boolean dirc) {
         coverage[16] = true;
         currentTet.horizontalMove(dirc, this);
     }
