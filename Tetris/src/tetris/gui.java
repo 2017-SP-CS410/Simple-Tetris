@@ -28,7 +28,7 @@ import javax.swing.Timer;
  */
 public class gui extends javax.swing.JFrame {
 
-    GameState gs = new GameState(new GamePlay(), new Skin());
+    public static GameState gs = new GameState(new GamePlay(), new Skin());
     public Timer clock = new Timer(50, new ActionListener() {  // 50ms delay between ticks
         @Override
         public void actionPerformed(ActionEvent e) {

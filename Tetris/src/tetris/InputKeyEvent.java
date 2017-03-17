@@ -13,11 +13,11 @@ import java.awt.event.KeyEvent;
  * @author JesseRichmond
  */
 public class InputKeyEvent extends KeyAdapter {
-    @Override
+    
     public void keyReleased (KeyEvent e) {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_A) {
-            GameState.horizontalMove(false);
+            gui.gs.horizontalMove(false);
         }
     }
 }
