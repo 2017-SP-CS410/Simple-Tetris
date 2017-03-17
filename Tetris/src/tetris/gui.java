@@ -42,8 +42,8 @@ public class gui extends javax.swing.JFrame {
     public gui() {
         initComponents();
         addKeyListener(new InputKeyEvent());
-        gs.testWell();
-        gs.testAnim();
+//        gs.testWell();
+//        gs.testAnim();
         clock.start();
 
     }
@@ -58,9 +58,9 @@ public class gui extends javax.swing.JFrame {
     }
 
     public void tick() {
+        System.out.println("running");
         gs.tick();
         this.repaint();
-        gs.tick();
     }
 
     //Key binding for controlling the game
