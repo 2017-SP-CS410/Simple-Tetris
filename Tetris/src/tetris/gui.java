@@ -58,7 +58,7 @@ public class gui extends javax.swing.JFrame {
     }
 
     public void tick() {
-        System.out.println("running");
+        //System.out.println("running");
         gs.tick();
         this.repaint();
     }
@@ -78,7 +78,7 @@ public class gui extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 153));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(260, 520));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

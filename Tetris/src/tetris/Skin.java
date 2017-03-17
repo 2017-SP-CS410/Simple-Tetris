@@ -35,7 +35,7 @@ public class Skin {
     public int animationFrame = 20;  // Number of frames for an animation
     public int colorIndex = 0; // Index for cycling colors
     public int animCount = 5;
-    public int colorCount = 3;
+    public int dummyLevel = 0;
     
     private int r[] = {255, 50, 128, 83, 255, 190, 51, 242, 202, 255};
 
@@ -67,7 +67,7 @@ public class Skin {
                     g2.setColor(b.c);  // Sets color from Block b
                     // Draws a 26 x 26 rectangle Block b's X and Y
                     g2.fillRect(b.x * 26, b.y * 26, 26, 26);
-                    g2.setColor(Color.BLACK);  // Sets color for the border
+                    g2.setColor(Color.darkGray);  // Sets color for the border
                     g2.drawRect(b.x * 26, b.y * 26, 25, 25);  // Draws the border
                 }
             }
@@ -83,7 +83,7 @@ public class Skin {
             P2 tetBlockGrab = c.current.add((c.rotations[c.rotationState][k]).scale(26));
             // Draws a rectangle based off the block size
             g2.fillRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 26, 26);
-            g2.setColor(Color.BLACK);  // Sets color for the border
+            g2.setColor(Color.darkGray);  // Sets color for the border
             // Draws a border
             g2.drawRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 25, 25);
         }
@@ -140,28 +140,24 @@ public class Skin {
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(2));
         
-        g2.setColor(new Color(r[colorIndex],gr[colorIndex],b[colorIndex]));
-        
         for (int i = 0; i < 520; i += 26) {
             coverage[12] = true;
             for (int j = 0; j < 260; j += 26) {
                 coverage[13] = true;
+                System.out.println((int) (255 - (255*((520-i)/520f))));
+                g2.setColor(new Color(r[colorIndex],gr[colorIndex],b[colorIndex], (int) (255 - (255*((520-i)/520f)))));
                 g2.drawRect(j, i, 25, 25);
             }
         }
         
-        if (colorCount <= 0) {
+        if (dummyLevel != gs.level) {
             coverage[14] = true;
-            colorIndex++;
-            colorCount = 3;
-
-            if (colorIndex > 9) {
+            dummyLevel = gs.level;
+            if (gs.level % 10 == 0) {
                 coverage[15] = true;
-                colorIndex = 0;
+                colorIndex++;
             }
         }
-        
-        colorCount--;
         
     }
 }

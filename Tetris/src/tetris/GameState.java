@@ -36,7 +36,7 @@ public class GameState {
 
     public int score = 0;
     public int level = 0;
-    public double gravity = .01;
+    public double gravity = 2.6;
     public State state;
     public int untilLock = 20;  // Time until a Tetromino is locked
     // Array of lines that need to be deleted
@@ -205,9 +205,10 @@ public class GameState {
      */
     public void paint(Graphics g) {
         coverage[18] = true;
+        s.background(this, g);
         s.paint(this, g);
 
-        if (state.animation == State.animation) {
+        if (state == State.animation) {
             coverage[19] = true;
             if (s.animate(this, g)) {
                 coverage[20] = true;
