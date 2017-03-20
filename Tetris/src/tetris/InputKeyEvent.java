@@ -13,11 +13,24 @@ import java.awt.event.KeyEvent;
  * @author JesseRichmond
  */
 public class InputKeyEvent extends KeyAdapter {
-    
-    public void keyReleased (KeyEvent e) {
+
+    @Override
+    public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_A) {
-            gui.gs.horizontalMove(false);
+
+        switch (key) {
+            case (KeyEvent.VK_A):
+                gui.gs.horizontalMove(false);
+                break;
+            case (KeyEvent.VK_D):
+                gui.gs.horizontalMove(true);
+                break;
+            case (KeyEvent.VK_J):
+                gui.gs.rotate(false);
+                break;
+            case (KeyEvent.VK_L):
+                gui.gs.rotate(true);
+                break;
         }
     }
 }
