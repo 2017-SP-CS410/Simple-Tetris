@@ -38,9 +38,7 @@ public class Skin {
     public int dummyLevel = 0;
     
     private int r[] = {255, 50, 128, 83, 255, 190, 51, 242, 202, 255};
-
     private int gr[] = {224, 126, 10, 145, 172, 223, 102, 30, 114, 255};
-
     private int b[] = {48, 122, 6, 60, 68, 232, 147, 29, 102, 255};
 
     /**
@@ -53,6 +51,7 @@ public class Skin {
      */
     public void paint(GameState gs, Graphics g) {
         coverage[0] = true;
+        background(gs, g);
         Tetromino c = gs.currentTet;
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(4));
@@ -155,7 +154,7 @@ public class Skin {
             dummyLevel = gs.level;
             if (gs.level % 10 == 0) {
                 coverage[15] = true;
-                colorIndex++;
+                colorIndex = (colorIndex + 1)%r.length;
             }
         }
         

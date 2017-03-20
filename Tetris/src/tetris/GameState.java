@@ -209,7 +209,6 @@ public class GameState {
      */
     public void paint(Graphics g) {
         coverage[18] = true;
-        s.background(this, g);
         s.paint(this, g);
 
         if (state == State.animation) {
