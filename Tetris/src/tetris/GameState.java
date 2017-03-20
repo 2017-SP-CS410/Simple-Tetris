@@ -36,11 +36,9 @@ public class GameState {
 
     public int score = 0;
     public int level = 0;
-<<<<<<< Updated upstream
+    
     public double gravity = 2.6;
-=======
-    public double gravity = 20;
->>>>>>> Stashed changes
+
     public State state;
     public int untilLock = 20;  // Time until a Tetromino is locked
     // Array of lines that need to be deleted

@@ -16,6 +16,7 @@
  */
 package tetris;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ import javax.swing.Timer;
  */
 public class gui extends javax.swing.JFrame {
 
+    
     public static GameState gs = new GameState(new GamePlay(), new Skin());
     public Timer clock = new Timer(50, new ActionListener() {  // 50ms delay between ticks
         @Override
@@ -56,6 +58,43 @@ public class gui extends javax.swing.JFrame {
             gs.paint(g);
         }
     }
+    
+        private class MyJPanel2 extends JPanel{
+
+    public MyJPanel2(){
+    
+ 
+    }
+    
+
+    @Override 
+    public void paint(Graphics g) { 
+        //super.paintComponent(g); 
+
+        for(int i=0; i< Tetromino.coverage.length; i++){
+            if(Tetromino.coverage[i]){
+                g.setColor(Color.red);
+                g.fillRect(i*21, 0, 20, 20); 
+            }
+         
+        }
+        for(int i=0; i< GameState.coverage.length; i++){
+            if(GameState.coverage[i]){
+                g.setColor(Color.blue);
+                g.fillRect(i*21, 20, 20, 20); 
+            }
+         
+        }
+        for(int i=0; i< P2.coverage.length; i++){
+            if(P2.coverage[i]){
+                g.setColor(Color.green);
+                g.fillRect(i*21, 40, 20, 20); 
+            }
+         
+        }
+        //setVisible(true);
+    }
+    }
 
     public void tick() {
         //System.out.println("running");
@@ -74,7 +113,7 @@ public class gui extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new MyPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel2 = new MyJPanel2();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,7 +135,7 @@ public class gui extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 324, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +149,7 @@ public class gui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64))
         );
