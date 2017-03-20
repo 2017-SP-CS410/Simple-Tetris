@@ -35,11 +35,12 @@ public class GamePlay {
     public static Random r = new Random();
 
     /**
-     * Used to update both the level and gravity based on the number of lines
+     * Used to update the level, gravity, score based on the number of lines
      * cleared and other information stored in the GameState.
      * <p>
-     * In this basic version the level is increased by 1 and gravity is
-     * increased by 2% provided that lines is greater than 0.
+     * In this basic version the level is increased by 1, gravity is
+     * increased by 2% and score is increased by 2^(lines-1) provided that 
+     * lines is greater than 0.
      *
      * @param gs The current GameState
      * @param lines Number of lines cleared
@@ -50,6 +51,20 @@ public class GamePlay {
             coverage[1] = true;
             gs.level++;  // Increment the level
             gs.gravity += (0.02 * gs.gravity);  // Increase Gravity
+            switch (lines) {
+                case 1:
+                    gs.score += 1;
+                    break;
+                case 2:
+                    gs.score += 2;
+                    break;
+                case 3:
+                    gs.score += 4;
+                    break;
+                case 4:
+                    gs.score += 8;
+                    break;
+            }
         }
     }
 
