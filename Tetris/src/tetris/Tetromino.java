@@ -60,7 +60,7 @@ public class Tetromino {
         // The possible rotations for an I piece
         P2[] pos1 = {new P2(-2, 0), new P2(-1, 0), new P2(0, 0), new P2(1, 0)};
         P2[] pos2 = {new P2(0, -2), new P2(0, -1), new P2(0, 0), new P2(0, 1)};
-        P2[] pos3 = {new P2(-1, 0), new P2(0, 0), new P2(0, 1), new P2(0, 2)};
+        P2[] pos3 = {new P2(-1, 0), new P2(0, 0), new P2(1, 0), new P2(2, 0)};
         P2[] pos4 = {new P2(0, -1), new P2(0, 0), new P2(0, 1), new P2(0, 2)};
 
         P2[][] tet = {pos1, pos2, pos3, pos4};
@@ -151,7 +151,7 @@ public class Tetromino {
     public static Tetromino tetT(P2 start, Color c) {
         coverage[6] = true;
         // The possible rotations for a T piece
-        P2[] pos1 = {new P2(-1, 0), new P2(0, 0), new P2(0, 1), new P2(1, 0)};
+        P2[] pos1 = {new P2(-1, 0), new P2(0, 0), new P2(0, -1), new P2(1, 0)};
         P2[] pos2 = {new P2(0, -1), new P2(0, 0), new P2(1, 0), new P2(0, 1)};
         P2[] pos3 = {new P2(-1, 0), new P2(0, 0), new P2(0, 1), new P2(1, 0)};
         P2[] pos4 = {new P2(-1, 0), new P2(0, -1), new P2(0, 0), new P2(0, 1)};
@@ -211,21 +211,47 @@ public class Tetromino {
                 }
 
             }
-
-            for (int i = 0; i < 22; i++) {
+            for (int i = 19; i >= 0; i--) {
                 coverage[28] = true;
-                for (int j = (int) minX; j < (int) maxX; j++) {
+                for (int j = (int) minX; j <= (int) maxX; j++) {
                     coverage[29] = true;
-                    if (gs.stack[i][j].y < lowY) {
-                        coverage[30] = true;
-                        lowY = gs.stack[i][j].y;
+                    if (gs.stack[i][j] != null) {
+                        if (gs.stack[i][j].y < lowY) {
+                            coverage[30] = true;
+                            lowY = gs.stack[i][j].y;
+                        }
                     }
+//                    else{
+//                        P2[] rot = this.rotations[this.rotationState];
+//                        double max = Math.max(rot[0].y, Math.max(rot[1].y, 
+//                                    Math.max(rot[2].y, rot[3].y)));
+////                        double min = Math.min(rot[0].y, Math.min(rot[1].y, 
+////                                    Math.min(rot[2].y, rot[3].y)));
+////                        min = Math.abs(min);
+//                        max = Math.abs(max);
+//                        double dif = max;
+//                        dif = 19-dif;
+//                        if (lowY == -1) {
+//                            lowY = dif;
+//                        }
+//                    }
                 }
+            }
+            if (lowY == -1) {
+                P2[] rot = this.rotations[this.rotationState];
+                double max = Math.max(rot[0].y, Math.max(rot[1].y,
+                        Math.max(rot[2].y, rot[3].y)));
+//                        double min = Math.min(rot[0].y, Math.min(rot[1].y, 
+//                                    Math.min(rot[2].y, rot[3].y)));
+//                        min = Math.abs(min);
+                max = Math.abs(max);
+                double dif = max;
+                lowY = 19 - dif;
             }
             lowY = lowY * Block.HEIGHT;
 
             double difference = lowY - current.y;
-            current.y = current.y + difference;
+            current.y += difference;
 
             return true;
         }
@@ -256,6 +282,8 @@ public class Tetromino {
             // If there is an intersection
             coverage[14] = true;
             current.x = prev;
+        } else {
+            gs.state = GameState.State.falling;
         }
     }
 
@@ -272,10 +300,10 @@ public class Tetromino {
 
         if (d == false) {
             coverage[16] = true;
-            this.rotationState = (this.rotationState - 1) % this.rotations[rotationState].length;
+            this.rotationState = (this.rotationState - 1 + (this.rotations.length * 3)) % this.rotations.length;
         } else if (d == true) {
             coverage[17] = true;
-            this.rotationState = (this.rotationState + 1) % this.rotations[rotationState].length;
+            this.rotationState = (this.rotationState + 1) % this.rotations.length;
         }
 
         if (this.intersect(gs)) {
@@ -288,7 +316,6 @@ public class Tetromino {
 
         }
         // change to conditional assignment ie: http://www.cafeaulait.org/course/week2/43.html
-
     }
 
     /**
@@ -306,12 +333,12 @@ public class Tetromino {
 
         for (P2 a : this.rotations[this.rotationState]) {
             coverage[20] = true;
-            if (a.x + p.x < 0 || a.x + p.x > 10 || a.y + p.y > 20) {
+            if (a.x + p.x < 0 || a.x + p.x >= 10 || a.y + p.y >= 20) {
                 // Check for sides and bottom
                 coverage[21] = true;
                 return true;
             }
-            if((int)(a.y + p.y) < 0){
+            if ((int) (a.y + p.y) < 0) {
                 return false;
             }
             if (gs.stack[(int) (a.y + p.y)][(int) (a.x + p.x)] != null) {

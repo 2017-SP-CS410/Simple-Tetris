@@ -37,7 +37,7 @@ public class GameState {
     public int score = 0;
     public int level = 0;
     
-    public double gravity = 2.6;
+    public double gravity = 10;
 
     public State state;
     public int untilLock = 20;  // Time until a Tetromino is locked
@@ -215,7 +215,7 @@ public class GameState {
                 coverage[20] = true;
                 for (int i : deletedLines) {
                     if (i != -1) {
-                        for (int k = i; k <= 0; k--) {
+                        for (int k = i; k >= 0; k--) {
                             for (int j = 0; j < 10; j++) {
                                 if (stack[k][j] != null) {
                                     stack[k][j] = stack[k - 1][j];
