@@ -198,9 +198,7 @@ public class Tetromino {
             current.y -= gs.gravity;
             double minX = 11;
             double maxX = -1;
-            double lowY = 22;
-            int highY = -1;
-            double highY2 = -1;
+            double lowY = -1;
             for (P2 a : this.rotations[this.rotationState]) {
                 coverage[25] = true;
                 if (a.x + p.x < minX) {
@@ -211,11 +209,9 @@ public class Tetromino {
                     coverage[27] = true;
                     maxX = a.x + p.x;
                 }
-                highY = (a.y + p.y) > highY ? (int)(a.y + p.y) : highY;
-                highY2 = (a.y*Block.WIDTH + current.y) > highY2 ? 
-                        (a.y*Block.WIDTH + current.y) : highY2;
+
             }
-            for (int i = 19; i >= highY+1; i--) {
+            for (int i = 19; i >= 0; i--) {
                 coverage[28] = true;
                 for (int j = (int) minX; j <= (int) maxX; j++) {
                     coverage[29] = true;
@@ -225,18 +221,36 @@ public class Tetromino {
                             lowY = gs.stack[i][j].y;
                         }
                     }
+//                    else{
+//                        P2[] rot = this.rotations[this.rotationState];
+//                        double max = Math.max(rot[0].y, Math.max(rot[1].y, 
+//                                    Math.max(rot[2].y, rot[3].y)));
+////                        double min = Math.min(rot[0].y, Math.min(rot[1].y, 
+////                                    Math.min(rot[2].y, rot[3].y)));
+////                        min = Math.abs(min);
+//                        max = Math.abs(max);
+//                        double dif = max;
+//                        dif = 19-dif;
+//                        if (lowY == -1) {
+//                            lowY = dif;
+//                        }
+//                    }
                 }
             }
-//            P2[] rot = this.rotations[this.rotationState];
-//            double max = Math.max(rot[0].y, Math.max(rot[1].y,
-//                        Math.max(rot[2].y, rot[3].y)));
-//            if (lowY == 22) {
-//                lowY = 19;
-//            }
-//            lowY = (lowY-1) * Block.HEIGHT;
-            lowY = lowY == 22 ? 19*Block.WIDTH : (lowY-1)*Block.WIDTH;
-            System.out.println(lowY);
-            double difference = lowY - highY2;
+            if (lowY == -1) {
+                P2[] rot = this.rotations[this.rotationState];
+                double max = Math.max(rot[0].y, Math.max(rot[1].y,
+                        Math.max(rot[2].y, rot[3].y)));
+//                        double min = Math.min(rot[0].y, Math.min(rot[1].y, 
+//                                    Math.min(rot[2].y, rot[3].y)));
+//                        min = Math.abs(min);
+                max = Math.abs(max);
+                double dif = max;
+                lowY = 19 - dif;
+            }
+            lowY = lowY * Block.HEIGHT;
+
+            double difference = lowY - current.y;
             current.y += difference;
 
             return true;
