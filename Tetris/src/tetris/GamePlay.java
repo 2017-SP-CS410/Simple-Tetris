@@ -77,12 +77,12 @@ public class GamePlay {
      */
     public void nextTet(GameState gs) {
         coverage[2] = true;
-        int rand = r.nextInt(7);  // Get a random number
-        P2 p = new P2(130, -52);  // Default starting position
+        int rand = r.nextInt(2);  // Get a random number
+        P2 p = new P2(Block.WIDTH*4, Block.WIDTH*(-2));  // Default starting position
         switch (rand) {
             case 0:
                 coverage[3] = true;
-                gs.currentTet = Tetromino.tetI(p, Color.RED);
+                gs.currentTet = Tetromino.tetO(p, Color.YELLOW);
                 break;
             case 1:
                 coverage[4] = true;
@@ -98,7 +98,7 @@ public class GamePlay {
                 break;
             case 4:
                 coverage[7] = true;
-                gs.currentTet = Tetromino.tetO(p, Color.YELLOW);
+                gs.currentTet = Tetromino.tetI(p, Color.RED);
                 break;
             case 5:
                 coverage[8] = true;

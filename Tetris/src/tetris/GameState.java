@@ -40,12 +40,12 @@ public class GameState {
     public double gravity = 10;
 
     public State state;
-    public int untilLock = 20;  // Time until a Tetromino is locked
+    public int untilLock = 10;  // Time until a Tetromino is locked
     // Array of lines that need to be deleted
     public int deletedLines[] = {-1, -1, -1, -1};
     public GamePlay gp;
     public Skin s;
-    public Block[][] stack = new Block[22][10];
+    public Block[][] stack = new Block[20][10];
     public Tetromino currentTet;
 
     /**
@@ -109,7 +109,13 @@ public class GameState {
             coverage[9] = true;
             state = State.locking;
         }
-
+    }
+    
+    public void drop(double gravity) {
+        double old = this.gravity;
+        this.gravity = gravity;
+        drop();
+        this.gravity = old;
     }
 
     /**
@@ -215,11 +221,15 @@ public class GameState {
                 coverage[20] = true;
                 for (int i : deletedLines) {
                     if (i != -1) {
-                        for (int k = i; k >= 0; k--) {
+                        for (int z = 0; z < 10; z++) {
+                            stack[i][z] = null;
+                        }
+                        for (int k = i-1; k >= 0; k--) {
                             for (int j = 0; j < 10; j++) {
                                 if (stack[k][j] != null) {
-                                    stack[k][j] = stack[k - 1][j];
-                                    stack[k][j].y -= 1;
+                                    stack[k][j].y += 1;
+                                    stack[k+1][j] = stack[k][j];
+                                    stack[k][j] = null;
                                 }
                             }
                         }
