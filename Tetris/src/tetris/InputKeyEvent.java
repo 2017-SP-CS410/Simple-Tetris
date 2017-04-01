@@ -31,6 +31,8 @@ public class InputKeyEvent extends KeyAdapter {
             case (KeyEvent.VK_L):
                 gui.gs.rotate(true);
                 break;
+            case (KeyEvent.VK_S):
+                gui.gs.drop(500);
         }
     }
 }
