@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 public class InputKeyEvent extends KeyAdapter {
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
         switch (key) {
@@ -32,7 +32,10 @@ public class InputKeyEvent extends KeyAdapter {
                 gui.gs.rotate(true);
                 break;
             case (KeyEvent.VK_S):
-                gui.gs.drop(500);
+                gui.gs.drop(1000);
+                break;
+            case (KeyEvent.VK_R):
+                gui.gs.stack = new Block[20][10];
         }
     }
 }

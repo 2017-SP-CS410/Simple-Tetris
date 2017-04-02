@@ -256,7 +256,7 @@ public class GameState {
      */
     public void testWell() {
         coverage[21] = true;
-        for (int i = 0; i < stack.length; i++) {
+        for (int i = stack.length-1; i > 10; i--) {
             for (int j = 0; j < stack[i].length; j++) {
                 stack[i][j] = new Block(j, i, Color.red);
             }

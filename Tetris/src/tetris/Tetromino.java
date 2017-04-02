@@ -189,55 +189,48 @@ public class Tetromino {
      */
     public boolean drop(GameState gs) {
         coverage[8] = true;
-        P2 p = convPoint();
-
-        double prev = current.y;
         current.y += gs.gravity;
+        P2 p = convPoint();
         if (this.intersect(gs)) {
             coverage[9] = true;
-            current.y -= gs.gravity;
-            double minX = 11;
-            double maxX = -1;
-            double lowY = 22;
-            int highY = -1;
-            double highY2 = -1;
-            for (P2 a : this.rotations[this.rotationState]) {
-                coverage[25] = true;
-                if (a.x + p.x < minX) {
-                    coverage[26] = true;
-                    minX = a.x + p.x;
-                }
-                if (a.x + p.x > maxX) {
-                    coverage[27] = true;
-                    maxX = a.x + p.x;
-                }
-                highY = (a.y + p.y) > highY ? (int)(a.y + p.y) : highY;
-                highY2 = (a.y*Block.WIDTH + current.y) > highY2 ? 
-                        (a.y*Block.WIDTH + current.y) : highY2;
+            current.y = p.y*Block.WIDTH;
+            while(intersect(gs)) {
+                current.y -= Block.WIDTH;
             }
-            for (int i = 19; i >= highY+1; i--) {
-                coverage[28] = true;
-                for (int j = (int) minX; j <= (int) maxX; j++) {
-                    coverage[29] = true;
-                    if (gs.stack[i][j] != null) {
-                        if (gs.stack[i][j].y < lowY) {
-                            coverage[30] = true;
-                            lowY = gs.stack[i][j].y;
-                        }
-                    }
-                }
-            }
-//            P2[] rot = this.rotations[this.rotationState];
-//            double max = Math.max(rot[0].y, Math.max(rot[1].y,
-//                        Math.max(rot[2].y, rot[3].y)));
-//            if (lowY == 22) {
-//                lowY = 19;
+//            double minX = 11;
+//            double maxX = -1;
+//            double lowY = 22;
+//            int highY = -1;
+//            double highY2 = -1;
+//            for (P2 a : this.rotations[this.rotationState]) {
+//                coverage[25] = true;
+//                if (a.x + p.x < minX) {
+//                    coverage[26] = true;
+//                    minX = a.x + p.x;
+//                }
+//                if (a.x + p.x > maxX) {
+//                    coverage[27] = true;
+//                    maxX = a.x + p.x;
+//                }
+//                highY = (a.y + p.y) > highY ? (int)(a.y + p.y) : highY;
+//                highY2 = (a.y*Block.WIDTH + current.y) > highY2 ? 
+//                        (a.y*Block.WIDTH + current.y) : highY2;
 //            }
-//            lowY = (lowY-1) * Block.HEIGHT;
-            lowY = lowY == 22 ? 19*Block.WIDTH : (lowY-1)*Block.WIDTH;
-            System.out.println(lowY);
-            double difference = lowY - highY2;
-            current.y += difference;
+//            for (int i = 19; i >= highY+1; i--) {
+//                coverage[28] = true;
+//                for (int j = (int) minX; j <= (int) maxX; j++) {
+//                    coverage[29] = true;
+//                    if (gs.stack[i][j] != null) {
+//                        if (gs.stack[i][j].y < lowY) {
+//                            coverage[30] = true;
+//                            lowY = gs.stack[i][j].y;
+//                        }
+//                    }
+//                }
+//            }
+//            lowY = lowY == 22 ? 19*Block.WIDTH : (lowY-1)*Block.WIDTH;
+//            double difference = lowY - highY2;
+//            current.y += difference;
 
             return true;
         }
@@ -299,7 +292,8 @@ public class Tetromino {
                 coverage[31] = true;
                 this.rotationState = prev;
             }
-
+        } else {
+            gs.state = GameState.State.falling;
         }
         // change to conditional assignment ie: http://www.cafeaulait.org/course/week2/43.html
     }
@@ -374,58 +368,6 @@ public class Tetromino {
         }
         coverage[38] = true;
         return false;
-
-        //This is the back-up code in case kick method code does not work correctly
-//        if (b == true) { // clockwise rotation
-//            current.x = current.x - 26; //move to stage 1
-//            if (intersect(s)) {
-//                current.y = current.y - 26; // move to stage 2
-//                if (intersect(s)) {
-//                    current.y = current.y + 2 * 26; // move to state 3
-//                    current.x = current.x + 26;
-//                    if (intersect(s)) {
-//                        current.y = current.y + 26; // move to state 4
-//                        if (intersect(s)) {
-//                            current.y = current.y - 2 * 26; // return to original pos
-//                            return false;
-//                        } else {
-//                            return true;
-//                        }
-//                    } else {
-//                        return true;
-//                    }
-//                } else {
-//                    return true;
-//                }
-//            } else {
-//                return true;
-//            }
-//
-//        } else { //counterclockwise rotation
-//            current.x = current.x + 26; // move to stage 1
-//            if (intersect(s)) {
-//                current.y = current.y - 26; // move stage 2
-//                if (intersect(s)) {
-//                    current.y = current.y + 2 * 26;
-//                    current.x = current.x - 26; // move to stage 3
-//                    if (intersect(s)) {
-//                        current.y = current.y + 26; // move to stage 4
-//                        if (intersect(s)) {
-//                            current.y = current.y - 2 * 26; // return to original pos
-//                            return false;
-//                        } else {
-//                            return true;
-//                        }
-//                    } else {
-//                        return true;
-//                    }
-//                } else {
-//                    return true;
-//                }
-//            } else {
-//                return true;
-//            }
-//        }
     }
 
     /**

@@ -86,6 +86,9 @@ public class Skin {
             // Draws a border
             g2.drawRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 25, 25);
         }
+        // Draw grab point of Tetromino. Temporary
+//        g2.setColor(Color.YELLOW);
+//        g2.fillOval((int)c.current.x-5, (int)c.current.y-5, 10, 10);
     }
 
     /**
@@ -143,7 +146,6 @@ public class Skin {
             coverage[12] = true;
             for (int j = 0; j < 260; j += 26) {
                 coverage[13] = true;
-                System.out.println((int) (255 - (255*((520-i)/520f))));
                 g2.setColor(new Color(r[colorIndex],gr[colorIndex],b[colorIndex], (int) (255 - (255*((520-i)/520f)))));
                 g2.drawRect(j, i, 25, 25);
             }
