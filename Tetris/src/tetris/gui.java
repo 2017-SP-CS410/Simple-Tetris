@@ -29,7 +29,6 @@ import javax.swing.Timer;
  */
 public class gui extends javax.swing.JFrame {
 
-    
     public static GameState gs = new GameState(new GamePlay(), new Skin());
     public Timer clock = new Timer(50, new ActionListener() {  // 50ms delay between ticks
         @Override
@@ -58,42 +57,40 @@ public class gui extends javax.swing.JFrame {
             gs.paint(g);
         }
     }
-    
-        private class MyJPanel2 extends JPanel{
 
-    public MyJPanel2(){
-    
- 
-    }
-    
+    private class MyJPanel2 extends JPanel {
 
-    @Override 
-    public void paint(Graphics g) { 
-        //super.paintComponent(g); 
+        public MyJPanel2() {
 
-        for(int i=0; i< Tetromino.coverage.length; i++){
-            if(Tetromino.coverage[i]){
-                g.setColor(Color.red);
-                g.fillRect(i*21, 0, 20, 20); 
-            }
-         
         }
-        for(int i=0; i< GameState.coverage.length; i++){
-            if(GameState.coverage[i]){
-                g.setColor(Color.blue);
-                g.fillRect(i*21, 20, 20, 20); 
+
+        @Override
+        public void paint(Graphics g) {
+            //super.paintComponent(g); 
+
+            for (int i = 0; i < Tetromino.coverage.length; i++) {
+                if (Tetromino.coverage[i]) {
+                    g.setColor(Color.red);
+                    g.fillRect(i * 21, 0, 20, 20);
+                }
+
             }
-         
-        }
-        for(int i=0; i< P2.coverage.length; i++){
-            if(P2.coverage[i]){
-                g.setColor(Color.green);
-                g.fillRect(i*21, 40, 20, 20); 
+            for (int i = 0; i < GameState.coverage.length; i++) {
+                if (GameState.coverage[i]) {
+                    g.setColor(Color.blue);
+                    g.fillRect(i * 21, 20, 20, 20);
+                }
+
             }
-         
+            for (int i = 0; i < P2.coverage.length; i++) {
+                if (P2.coverage[i]) {
+                    g.setColor(Color.green);
+                    g.fillRect(i * 21, 40, 20, 20);
+                }
+
+            }
+            //setVisible(true);
         }
-        //setVisible(true);
-    }
     }
 
     public void tick() {
@@ -117,6 +114,11 @@ public class gui extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
+        setForeground(java.awt.Color.black);
+        setName("Frame2"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(684, 1312));
+        setSize(new java.awt.Dimension(684, 1312));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -135,6 +137,8 @@ public class gui extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(136, 314, 260, 520);
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
