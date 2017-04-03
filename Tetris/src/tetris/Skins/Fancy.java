@@ -36,7 +36,6 @@ public class Fancy extends Skin{
     public Fancy() {
         super();
         animationFrame = 20;
-        dummyLevel = 0;
     }
     
     public int colorIndex = 0; // Index for cycling colors
@@ -44,6 +43,7 @@ public class Fancy extends Skin{
     private final int r[] = {255, 50, 128, 83, 255, 190, 51, 242, 202, 255};
     private final int gr[] = {224, 126, 10, 145, 172, 223, 102, 30, 114, 255};
     private final int b[] = {48, 122, 6, 60, 68, 232, 147, 29, 102, 255};
+    public int dummyLevel = 0;
 
     /**
      * paints the row and current Tetromino inside of the GameState gs.

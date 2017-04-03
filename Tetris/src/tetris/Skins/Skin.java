@@ -38,12 +38,9 @@ public class Skin {
     public static boolean[] coverage = new boolean[16];
     
     public int animationFrame = 20;  // Number of frames for an animation
-    public int dummyLevel = 0;
-    public int animCount  = 5;
 
     /**
-     * paints the row and current Tetromino inside of the GameState gs.
-     * <p>
+     * paints the row and current Tetromino inside of the GameState gs
      * This base version draws the the blocks with a 1 pixel border around it.
      *
      * @param gs GameState
@@ -99,14 +96,14 @@ public class Skin {
         if (animationFrame <= 0) {
             coverage[6] = true;
             // If the animation is done return true
+            animationFrame = 20;
             return true;
         }
 
         int[] lines = gs.deletedLines;  // Indecies of deleted lines
-        if (animCount <= 0) {
+        if (animationFrame % 10 <= 5) {
             coverage[7] = true;
             g.setColor(Color.WHITE);
-            animCount = 5;
         } else {
             coverage[8] = true;
             g.setColor(Color.BLACK);
@@ -119,7 +116,6 @@ public class Skin {
                 g.fillRect(0, lines[i] * 26, 260, 26);
             }
         }
-        animCount--;
         animationFrame--;
         return false;
     }
