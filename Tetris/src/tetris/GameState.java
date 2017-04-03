@@ -16,6 +16,7 @@
  */
 package tetris;
 
+import tetris.Skins.Skin;
 import java.awt.Color;
 import java.awt.Graphics;
 

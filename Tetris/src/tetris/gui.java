@@ -16,6 +16,7 @@
  */
 package tetris;
 
+import tetris.Skins.Fancy;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -29,7 +30,7 @@ import javax.swing.Timer;
  */
 public class gui extends javax.swing.JFrame {
 
-    public static GameState gs = new GameState(new GamePlay(), new Skin());
+    public static GameState gs = new GameState(new GamePlay(), new Fancy());
     public Timer clock = new Timer(50, new ActionListener() {  // 50ms delay between ticks
         @Override
         public void actionPerformed(ActionEvent e) {

@@ -14,12 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package tetris;
+package tetris.Skins;
 
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import tetris.Block;
+import tetris.GameState;
+import tetris.P2;
+import tetris.Tetromino;
 
 /**
  * The methods related to painting that can be changed between different
@@ -29,17 +33,13 @@ import java.awt.Graphics2D;
  * @author Team4
  */
 public class Skin {
-
+    // TODO: add coverage to fance
+    // TODO: change coverage to a list
     public static boolean[] coverage = new boolean[16];
     
     public int animationFrame = 20;  // Number of frames for an animation
-    public int colorIndex = 0; // Index for cycling colors
-    public int animCount = 5;
     public int dummyLevel = 0;
-    
-    private int r[] = {255, 50, 128, 83, 255, 190, 51, 242, 202, 255};
-    private int gr[] = {224, 126, 10, 145, 172, 223, 102, 30, 114, 255};
-    private int b[] = {48, 122, 6, 60, 68, 232, 147, 29, 102, 255};
+    public int animCount  = 5;
 
     /**
      * paints the row and current Tetromino inside of the GameState gs.
@@ -66,8 +66,6 @@ public class Skin {
                     g2.setColor(b.c);  // Sets color from Block b
                     // Draws a 26 x 26 rectangle Block b's X and Y
                     g2.fillRect(b.x * 26, b.y * 26, 26, 26);
-                    g2.setColor(Color.darkGray);  // Sets color for the border
-                    g2.drawRect(b.x * 26, b.y * 26, 25, 25);  // Draws the border
                 }
             }
         }
@@ -82,13 +80,7 @@ public class Skin {
             P2 tetBlockGrab = c.current.add((c.rotations[c.rotationState][k]).scale(26));
             // Draws a rectangle based off the block size
             g2.fillRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 26, 26);
-            g2.setColor(Color.darkGray);  // Sets color for the border
-            // Draws a border
-            g2.drawRect((int) tetBlockGrab.x, (int) tetBlockGrab.y, 25, 25);
         }
-        // Draw grab point of Tetromino. Temporary
-//        g2.setColor(Color.YELLOW);
-//        g2.fillOval((int)c.current.x-5, (int)c.current.y-5, 10, 10);
     }
 
     /**
@@ -142,23 +134,22 @@ public class Skin {
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(2));
         
-        for (int i = 0; i < 520; i += 26) {
-            coverage[12] = true;
-            for (int j = 0; j < 260; j += 26) {
-                coverage[13] = true;
-                g2.setColor(new Color(r[colorIndex],gr[colorIndex],b[colorIndex], (int) (255 - (255*((520-i)/520f)))));
-                g2.drawRect(j, i, 25, 25);
-            }
+        float level = gs.level/10.0f+0.1f;
+        float r = 1-level;
+        float gr = 0.1f+level;
+        float b = 0.1f;
+        r = r < 0.1 ? 0.1f : r;
+        if (gr > 1) {
+            gr -= (level-1);
+            gr = gr < 0.1 ? 0.1f : gr;
+            b += (level-1);
+        }
+        if (b > 1) {
+            b -= (level-1);
+            b = b < 0.1 ? 0.1f : b;
         }
         
-        if (dummyLevel != gs.level) {
-            coverage[14] = true;
-            dummyLevel = gs.level;
-            if (gs.level % 10 == 0) {
-                coverage[15] = true;
-                colorIndex = (colorIndex + 1)%r.length;
-            }
-        }
-        
+        g.setColor(new Color(r, gr, b));
+        g.fillRect(0, 0, Block.WIDTH*10, Block.HEIGHT*20);
     }
 }
