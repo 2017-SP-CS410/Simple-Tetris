@@ -68,6 +68,9 @@ public class gui extends javax.swing.JFrame {
         @Override
         public void paint(Graphics g) {
             //super.paintComponent(g); 
+            
+            g.setColor(new Color (30, 30, 30));
+            g.fillRect(0, 0, 650, 55);
 
             for (int i = 0; i < Tetromino.coverage.length; i++) {
                 if (Tetromino.coverage[i]) {
@@ -90,7 +93,6 @@ public class gui extends javax.swing.JFrame {
                 }
 
             }
-            //setVisible(true);
         }
     }
 
@@ -111,15 +113,16 @@ public class gui extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new MyPanel();
-        jPanel2 = new MyJPanel2();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new MyJPanel2();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tetirs");
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(java.awt.Color.black);
         setName("Frame2"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(684, 1312));
-        setSize(new java.awt.Dimension(684, 1312));
+        setPreferredSize(new java.awt.Dimension(686, 999));
+        setSize(new java.awt.Dimension(686, 999));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -139,25 +142,30 @@ public class gui extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(136, 314, 260, 520);
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tetris/Tetris.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(1000, 1000));
+        jLabel1.setMinimumSize(new java.awt.Dimension(0, 0));
+        jLabel1.setPreferredSize(new java.awt.Dimension(686, 999));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(-10, -100, 700, 1200);
+
+        jPanel2.setBackground(new java.awt.Color(30, 30, 30));
+        jPanel2.setForeground(new java.awt.Color(30, 30, 30));
+        jPanel2.setPreferredSize(new java.awt.Dimension(650, 55));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGap(0, 650, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 1000, 680, 310);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tetris/Tetris.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(-10, -100, 700, 1200);
+        jPanel2.setBounds(20, 245, 650, 60);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

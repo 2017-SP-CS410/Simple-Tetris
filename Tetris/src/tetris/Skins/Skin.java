@@ -124,6 +124,7 @@ public class Skin {
      * Determines the background based on the level inside of GameState gs
      *
      * @param gs The current GameState
+     * @param g Graphics Context
      */
     public void background(GameState gs, Graphics g) {
         coverage[11] = true;
