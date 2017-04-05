@@ -5,6 +5,7 @@
  */
 package tetris;
 
+import tetris.Skins.Skin;
 import java.awt.Color;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

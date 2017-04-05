@@ -16,6 +16,7 @@
  */
 package tetris;
 
+import tetris.Skins.Skin;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -95,7 +96,6 @@ public class GameState {
                 }
             }
         }
-
     }
 
     /**
@@ -168,6 +168,7 @@ public class GameState {
         }
         if (index > 0) {
             coverage[14] = true;
+            s.background(this);
             update(index);  // Updates the score based on the lines cleared
             return true;
         }
@@ -256,7 +257,7 @@ public class GameState {
      */
     public void testWell() {
         coverage[21] = true;
-        for (int i = 0; i < stack.length; i++) {
+        for (int i = stack.length-1; i > 10; i--) {
             for (int j = 0; j < stack[i].length; j++) {
                 stack[i][j] = new Block(j, i, Color.red);
             }

@@ -50,7 +50,7 @@ public class GamePlay {
         if (lines > 0) {
             coverage[1] = true;
             gs.level++;  // Increment the level
-            gs.gravity += (0.02 * gs.gravity);  // Increase Gravity
+            gs.gravity += (0.2 * gs.gravity);  // Increase Gravity
             switch (lines) {
                 case 1:
                     gs.score += 1;
@@ -77,7 +77,7 @@ public class GamePlay {
      */
     public void nextTet(GameState gs) {
         coverage[2] = true;
-        int rand = r.nextInt(2);  // Get a random number
+        int rand = r.nextInt(7);  // Get a random number
         P2 p = new P2(Block.WIDTH*4, Block.WIDTH*(-2));  // Default starting position
         switch (rand) {
             case 0:
