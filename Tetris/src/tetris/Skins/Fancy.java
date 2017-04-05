@@ -23,6 +23,7 @@ import java.awt.Graphics2D;
 import tetris.Block;
 import tetris.GameState;
 import tetris.P2;
+import tetris.Skins.Background.GridBackground;
 import tetris.Tetromino;
 
 /**
@@ -35,15 +36,9 @@ public class Fancy extends Skin {
 
     public Fancy() {
         super();
-        animationFrame = 27;
+        this.animationFrame = 27;
+        this.b = new GridBackground();
     }
-
-    public int colorIndex = 0; // Index for cycling colors
-    // RGB color chanels
-    private final int r[] = {255, 50, 128, 83, 255, 190, 51, 242, 202, 255};
-    private final int gr[] = {224, 126, 10, 145, 172, 223, 102, 30, 114, 255};
-    private final int b[] = {48, 122, 6, 60, 68, 232, 147, 29, 102, 255};
-    public int dummyLevel = 0;
 
     /**
      * paints the row and current Tetromino inside of the GameState gs. This
@@ -54,7 +49,7 @@ public class Fancy extends Skin {
      */
     @Override
     public void paint(GameState gs, Graphics g) {
-        background(gs, g);
+        b.paint(gs, (Graphics2D) g);
         Tetromino c = gs.currentTet;
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(4));
@@ -87,33 +82,6 @@ public class Fancy extends Skin {
         }
     }
 
-    /**
-     * Determines the background based on the level inside of GameState gs. This
-     * is a grid with a gradient in the alpha from top to bottom.
-     *
-     * @param gs The current GameState
-     * @param g The Graphics Context
-     */
-    @Override
-    public void background(GameState gs, Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(2));
-
-        for (int i = 0; i < 520; i += 26) {
-            for (int j = 0; j < 260; j += 26) {
-                g2.setColor(new Color(r[colorIndex], gr[colorIndex], b[colorIndex], (int) (255 - (255 * ((520 - i) / 520f)))));
-                g2.drawRect(j, i, 25, 25);
-            }
-        }
-
-        if (dummyLevel != gs.level) {
-            dummyLevel = gs.level;
-            if (gs.level % 10 == 0) {
-                colorIndex = (colorIndex + 1) % r.length;
-            }
-        }
-    }
-
     @Override
     public boolean animate(GameState gs, Graphics g) {
 
@@ -142,7 +110,6 @@ public class Fancy extends Skin {
             animationFrame = 27;
             return true;
         }
-        
         animationFrame--;
         return false;
     }

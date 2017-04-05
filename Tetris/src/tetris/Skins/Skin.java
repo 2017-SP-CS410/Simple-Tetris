@@ -23,6 +23,8 @@ import java.awt.Graphics2D;
 import tetris.Block;
 import tetris.GameState;
 import tetris.P2;
+import tetris.Skins.Background.Background;
+import tetris.Skins.Background.PlainBackground;
 import tetris.Tetromino;
 
 /**
@@ -38,6 +40,11 @@ public class Skin {
     public static boolean[] coverage = new boolean[16];
     
     public int animationFrame = 20;  // Number of frames for an animation
+    public Background b;
+    
+    public Skin() {
+        this.b = new PlainBackground();
+    }
 
     /**
      * paints the row and current Tetromino inside of the GameState gs
@@ -48,7 +55,7 @@ public class Skin {
      */
     public void paint(GameState gs, Graphics g) {
         coverage[0] = true;
-        background(gs, g);
+        b.paint(gs, (Graphics2D) g);
         Tetromino c = gs.currentTet;
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(4));
@@ -124,29 +131,20 @@ public class Skin {
      * Determines the background based on the level inside of GameState gs
      *
      * @param gs The current GameState
-     * @param g Graphics Context
      */
-    public void background(GameState gs, Graphics g) {
+    public void background(GameState gs) {
         coverage[11] = true;
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(2));
         
-        float level = gs.level/10.0f+0.1f;
-        float r = 1-level;
-        float gr = 0.1f+level;
-        float b = 0.1f;
-        r = r < 0.1 ? 0.1f : r;
-        if (gr > 1) {
-            gr -= (level-1);
-            gr = gr < 0.1 ? 0.1f : gr;
-            b += (level-1);
-        }
-        if (b > 1) {
-            b -= (level-1);
-            b = b < 0.1 ? 0.1f : b;
+        int del = 0;
+        for (int i: gs.deletedLines) {
+            if (i != -1){
+                del++;
+            }
         }
         
-        g.setColor(new Color(r, gr, b));
-        g.fillRect(0, 0, Block.WIDTH*10, Block.HEIGHT*20);
+        if (Math.floor(gs.level/10f) < 
+                Math.floor((gs.level+del)/10f)) {
+            b.change();
+        }
     }
 }

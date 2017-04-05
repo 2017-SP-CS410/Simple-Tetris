@@ -96,7 +96,6 @@ public class GameState {
                 }
             }
         }
-
     }
 
     /**
@@ -169,6 +168,7 @@ public class GameState {
         }
         if (index > 0) {
             coverage[14] = true;
+            s.background(this);
             update(index);  // Updates the score based on the lines cleared
             return true;
         }
